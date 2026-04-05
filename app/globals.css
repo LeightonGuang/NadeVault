@@ -1,26 +1,48 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  box-sizing: border-box;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/*  ============= USE OKLCH COLORS =============
+Use this link to test colours: https://oklch.com
+Convert hsl to oklch: https://atmos.style/color-converter/hsl-to-oklch
+
+L = Lightness (0-1) | How light or dark the color is (0 = black, 100 = white)
+C = Chroma (0-0.37) | How intense or vivid the color is (0 = gray, higher = more saturated)
+H = Hue (0-360)     | The angle on the color wheel (0° = red, 120° = green, 240° = blue, etc.)
+*/
+
+@theme {
+  --color-cs-blue: #26397e;
+  --color-cs-yellow: #ffad01;
+  --color-success-text: oklch(64.3% 0.205 148.9);
+  --color-success-bg: oklch(90% 0.205 148.9);
+  --color-success-border: oklch(64.3% 0.205 148.9);
+  --color-warning-text: oklch(64.3% 0.205 26.9);
+  --color-warning-bg: oklch(90% 0.205 26.9);
+  --color-warning-border: oklch(64.3% 0.205 26.9);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  [data-theme="dark"] {
   }
 }
 
+@font-face {
+  font-family: "Hoover";
+  src: url("/fonts/Hoover.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Variable.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Satoshi", sans-serif;
 }
