@@ -1,4 +1,4 @@
-export type Maps =
+export type MapSlug =
   | "ancient"
   | "anubis"
   | "dust2"
