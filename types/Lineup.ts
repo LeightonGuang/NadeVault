@@ -1,15 +1,17 @@
-import { MapSlug } from "./Map";
 import { Point } from "./Point";
+import { MapSlug } from "./Map";
+import { Precision } from "./Precision";
 
 export interface Lineup {
   id: number;
   name: string;
-  description: string;
   mapSlug: MapSlug;
-  precision: "Very Forgiving" | "Forgiving" | "Precise" | "Pixel Perfect";
+  type: "flash" | "smoke" | "molly" | "he";
+  description: string;
+  precision: Precision;
   team: "T" | "CT";
   throwType: "bounce" | "walk" | "jump";
-  startPosition: Point;
-  endPosition: Point;
   duration: number;
+  youtubeUrl: string;
+  points: Point[];
 }
