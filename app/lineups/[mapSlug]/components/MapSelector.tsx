@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import getMaps from "@/assets/getMaps";
+import getMaps from "@/utils/getMaps";
 import { twMerge } from "tailwind-merge";
 
 import { MapSlug } from "@/types/Map";
