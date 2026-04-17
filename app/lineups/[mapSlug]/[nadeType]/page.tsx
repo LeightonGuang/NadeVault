@@ -9,26 +9,27 @@ const NadePage = async ({
 }: {
   params: Promise<{
     mapSlug: MapSlug;
-    nade: "all" | "flash" | "smoke" | "molly" | "he";
+    nadeType: "all" | "flash" | "smoke" | "molly" | "he";
   }>;
 }) => {
-  const { mapSlug, nade } = await params;
+  const { mapSlug, nadeType } = await params;
 
-  const lineups = await fetchLineups(mapSlug, nade);
+  const lineups = await fetchLineups(mapSlug, nadeType);
 
   const lineup = lineups[0];
 
   return (
-    <>
+    <section className="h-section flex flex-col">
       <MapSelector mapSlug={mapSlug} />
 
       <RadarAndInfo
+        className="max-w-section-max-width"
         mapSlug={mapSlug}
         lineups={lineups}
         selectedLineup={lineup}
-        nade={nade}
+        nadeType={nadeType}
       />
-    </>
+    </section>
   );
 };
 
