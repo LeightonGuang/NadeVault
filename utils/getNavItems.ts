@@ -1,11 +1,6 @@
 const getNavItems = () => {
   return [
     {
-      href: "/home",
-      label: "Home",
-      enabled: true,
-    },
-    {
       href: "/lineups/dust2",
       label: "Lineups",
       enabled: true,
