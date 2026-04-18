@@ -28,10 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex min-h-dvh flex-col antialiased`}
       >
         <Navbar />
-        <main className="bg-background text-foreground min-h-screen transition-colors selection:bg-red-500/30 selection:text-red-200">
+        <main className="bg-background pt-nav-height text-foreground flex flex-1 flex-col transition-colors selection:bg-red-500/30 selection:text-red-200">
           {children}
         </main>
         <Footer />

@@ -10,26 +10,26 @@ const LineupPage = async ({
 }: {
   params: Promise<{
     mapSlug: MapSlug;
-    nade: NadeType | "all";
+    nadeType: NadeType | "all";
     lineupSlug: string;
   }>;
 }) => {
-  const { mapSlug, nade, lineupSlug } = await params;
-  const lineups = await fetchLineups(mapSlug, nade);
+  const { mapSlug, nadeType, lineupSlug } = await params;
+  const lineups = await fetchLineups(mapSlug, nadeType);
   const lineup = lineups.find((l) => l.id === parseInt(lineupSlug));
 
   return (
-    <>
+    <section className="h-section flex flex-col">
       <MapSelector mapSlug={mapSlug} />
 
       <RadarAndInfo
+        className="max-w-section-max-width"
         mapSlug={mapSlug}
         lineups={lineups}
         selectedLineup={lineup}
-        lineupSlug={lineupSlug}
-        nade={nade}
+        nadeType={nadeType}
       />
-    </>
+    </section>
   );
 };
 
