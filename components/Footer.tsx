@@ -1,14 +1,10 @@
-import {
-  TiktokLogoSvg,
-  YoutubeLogoSvg,
-  InstagramLogoSvg,
-  XLogoSvg,
-} from "@/assets/icons";
 import Link from "next/link";
 import getNavItems from "@/utils/getNavItems";
+import getSocialLinks from "@/utils/getSocialLinks";
 
 const Footer = () => {
   const navLinks = getNavItems();
+  const socialLinks = getSocialLinks();
 
   return (
     <footer className="w-full border-t border-white/10 bg-zinc-950">
@@ -53,42 +49,18 @@ const Footer = () => {
               Follow Us
             </h3>
             <div className="flex gap-4">
-              <a
-                href="https://youtube.com/@nadevault"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-500 transition-colors hover:text-white"
-                aria-label="YouTube"
-              >
-                <YoutubeLogoSvg />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-500 transition-colors hover:text-white"
-                aria-label="Instagram"
-              >
-                <InstagramLogoSvg />
-              </a>
-              <a
-                href="https://tiktok.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-500 transition-colors hover:text-white"
-                aria-label="TikTok"
-              >
-                <TiktokLogoSvg />
-              </a>
-              <a
-                href="https://x.com/nadevault"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-zinc-500 transition-colors hover:text-white"
-                aria-label="X"
-              >
-                <XLogoSvg />
-              </a>
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-500 transition-colors hover:text-white"
+                  aria-label={link.name}
+                >
+                  {link.icon}
+                </a>
+              ))}
             </div>
           </div>
         </div>
