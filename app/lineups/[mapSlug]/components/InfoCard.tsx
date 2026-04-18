@@ -1,17 +1,23 @@
 import { Lineup } from "@/types/Lineup";
 import PrecisionMeter from "../../components/PrecisionMeter";
 
-const InfoCard = ({ lineup }: { lineup: Lineup | undefined }) => {
+const InfoCard = ({
+  lineup,
+  className,
+}: {
+  lineup: Lineup | undefined;
+  className?: string;
+}) => {
   return (
-    <div className="w-1/3 overflow-y-auto bg-red-900 p-4">
+    <div className={className}>
       {lineup ? (
-        <div>
+        <>
           <h2 className="font-[Hoover] text-xl font-medium text-white">
             {lineup.name}
           </h2>
 
           <iframe
-            className="aspect-9/16 w-full mt-4"
+            className="mt-4 aspect-9/16 w-full"
             src={lineup.youtubeUrl}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -34,7 +40,7 @@ const InfoCard = ({ lineup }: { lineup: Lineup | undefined }) => {
             <h3>Duration:</h3>
             <p>{lineup.duration} seconds</p>
           </div>
-        </div>
+        </>
       ) : (
         <div className="flex h-full w-full items-center justify-center">
           <span className="font-[Hoover] font-medium text-white">
