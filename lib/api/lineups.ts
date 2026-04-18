@@ -167,6 +167,22 @@ export const fetchLineups = async (
             duration: 1.4,
             youtubeUrl: "https://www.youtube.com/embed/DDG5FzTh47Y",
           },
+          {
+            id: 8,
+            mapSlug: "dust2",
+            type: "molly",
+            name: "Car molotov from A long",
+            description: "",
+            precision: "Forgiving",
+            team: "T",
+            throwType: "bounce",
+            points: [
+              { x: 748, y: 557 },
+              { x: 950, y: 305 },
+            ],
+            duration: 1.4,
+            youtubeUrl: "https://www.youtube.com/embed/DDG5FzTh47Y",
+          },
         ]);
       }, 500); // simulate network delay
     });
