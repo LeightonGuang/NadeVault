@@ -1,13 +1,13 @@
 import BackgroundGradient from "@/components/BackgroundGradient";
 
-const layout = async ({ children }: { children: React.ReactNode }) => {
+const LineupLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <section className="bg-background relative h-[calc(100dvh-var(--nav-height))]">
+    <div className="bg-background h-section relative">
       <BackgroundGradient />
 
-      <div className="flex h-full flex-col">{children}</div>
-    </section>
+      {children}
+    </div>
   );
 };
 
-export default layout;
+export default LineupLayout;

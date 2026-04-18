@@ -6,9 +6,9 @@ const Navbar = () => {
   const navLinks = getNavItems();
 
   return (
-    <nav className="fixed top-0 right-0 left-0 z-50 h-(--nav-height) border-b border-white/5 bg-black/50 backdrop-blur-md">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-(--nav-height) max-w-(--max-width) items-center justify-between">
+    <nav className="h-nav-height fixed top-0 right-0 left-0 z-50 border-b border-white/5 bg-black/50 backdrop-blur-md">
+      <div className="max-w-section-max-width mx-auto px-4">
+        <div className="h-nav-height flex items-center justify-between">
           <div className="flex shrink-0 items-center">
             <Link
               href="/home"
@@ -30,7 +30,7 @@ const Navbar = () => {
                   "inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium uppercase transition-colors",
                   link.enabled
                     ? "hover:border-primary hover:text-primary text-foreground"
-                    : "hover:cursor-default opacity-50",
+                    : "opacity-50 hover:cursor-default",
                 )}
               >
                 {link.label}
