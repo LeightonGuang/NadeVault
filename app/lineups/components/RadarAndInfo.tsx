@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 import Radar from "../[mapSlug]/components/Radar";
 import InfoCard from "../[mapSlug]/components/InfoCard";
 
@@ -10,27 +11,36 @@ const RadarAndInfo = ({
   lineups,
   selectedLineup,
   lineupSlug,
-  nade,
+  nadeType,
+  className,
 }: {
   mapSlug: MapSlug;
   lineups: Lineup[];
   selectedLineup: Lineup | undefined;
   lineupSlug?: string;
-  nade?: NadeType | "all";
+  nadeType?: NadeType | "all";
+  className?: string;
 }) => {
   return (
-    <div className="mx-auto min-h-0 w-full max-w-7xl flex-1">
-      <div className="flex h-full min-h-0 justify-between gap-4 p-4">
-        <Radar
-          mapSlug={mapSlug}
-          isReadOnly={true}
-          lineups={lineups}
-          lineupSlug={lineupSlug}
-          nade={nade}
-        />
+    <div
+      className={twMerge(
+        "mx-auto flex h-full min-h-0 w-full flex-1 gap-8 p-4",
+        className,
+      )}
+    >
+      <Radar
+        className="bg-black/25"
+        mapSlug={mapSlug}
+        isReadOnly={true}
+        lineups={lineups}
+        lineupSlug={lineupSlug}
+        nadeType={nadeType}
+      />
 
-        <InfoCard lineup={selectedLineup || lineups[0]} />
-      </div>
+      <InfoCard
+        className="h-full w-full overflow-y-auto bg-red-900 p-4"
+        lineup={selectedLineup || lineups[0]}
+      />
     </div>
   );
 };

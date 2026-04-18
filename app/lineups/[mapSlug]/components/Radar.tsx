@@ -17,13 +17,15 @@ const Radar = ({
   isReadOnly = false,
   lineups,
   lineupSlug,
-  nade = "all",
+  nadeType = "all",
+  className,
 }: {
   mapSlug: MapSlug;
   isReadOnly?: boolean;
   lineups: Lineup[];
   lineupSlug?: string;
-  nade?: NadeType | "all";
+  nadeType?: NadeType | "all";
+  className?: string;
 }) => {
   const mapWidth = 1024;
   const mapHeight = 1024;
@@ -52,175 +54,184 @@ const Radar = ({
   }, [points]);
 
   return (
-    <TransformWrapper>
-      <TransformComponent
-        wrapperClass="!h-full !w-max aspect-square"
-        contentClass="!h-full !w-max"
-      >
-        <div className="h-full w-max">
-          <section className="relative flex h-full w-max flex-col items-center justify-center p-4">
-            {/* Toolbar */}
-            {!isReadOnly ? (
-              <div className="absolute top-4 left-4 z-10 flex gap-2">
-                <Link
-                  href={`/lineups/${mapSlug}${isAdmin ? "?admin=true" : ""}`}
-                  className="rounded-lg border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:cursor-pointer hover:bg-white/20"
-                >
-                  Back to View
-                </Link>
-                <button
-                  onClick={clearPoints}
-                  className="rounded-lg border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:cursor-pointer hover:bg-white/20"
-                >
-                  Clear Map
-                </button>
-              </div>
-            ) : (
-              isAdmin && (
+    <div className={className}>
+      <TransformWrapper>
+        <TransformComponent
+          wrapperClass="!h-full !w-max aspect-square"
+          contentClass="!h-full !w-max"
+        >
+          <div className="h-full w-max">
+            <section className="relative flex h-full w-max flex-col items-center justify-center p-4">
+              {/* Toolbar */}
+              {!isReadOnly ? (
                 <div className="absolute top-4 left-4 z-10 flex gap-2">
                   <Link
-                    href={`/lineups/${mapSlug}/edit?admin=true`}
+                    href={`/lineups/${mapSlug}${isAdmin ? "?admin=true" : ""}`}
                     className="rounded-lg border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:cursor-pointer hover:bg-white/20"
                   >
-                    Edit Lineup
+                    Back to View
                   </Link>
+                  <button
+                    onClick={clearPoints}
+                    className="rounded-lg border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:cursor-pointer hover:bg-white/20"
+                  >
+                    Clear Map
+                  </button>
                 </div>
-              )
-            )}
+              ) : (
+                isAdmin && (
+                  <div className="absolute top-4 left-4 z-10 flex gap-2">
+                    <Link
+                      href={`/lineups/${mapSlug}/edit?admin=true`}
+                      className="rounded-lg border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:cursor-pointer hover:bg-white/20"
+                    >
+                      Edit Lineup
+                    </Link>
+                  </div>
+                )
+              )}
 
-            <div className="relative aspect-square h-full max-h-full max-w-full">
-              <div className="relative h-full w-full">
-                <Image
-                  className={`pointer-events-none aspect-square object-contain select-none`}
-                  draggable={false}
-                  src={`/radar/${mapSlug}.png`}
-                  alt={mapSlug}
-                  width={mapWidth}
-                  height={mapHeight}
-                  layout="intrinsic"
-                  priority
-                />
-              </div>
+              <div className="relative aspect-square h-full max-h-full max-w-full">
+                <div className="relative h-full w-full">
+                  <Image
+                    className={`pointer-events-none aspect-square object-contain select-none`}
+                    draggable={false}
+                    src={`/radar/${mapSlug}.png`}
+                    alt={mapSlug}
+                    width={mapWidth}
+                    height={mapHeight}
+                    layout="intrinsic"
+                    priority
+                  />
+                </div>
 
-              {/* lineups overlay */}
-              <svg
-                ref={svgRef}
-                viewBox={`0 0 ${mapWidth} ${mapHeight}`}
-                className={`absolute inset-0 h-full w-full touch-none ${
-                  isReadOnly ? "cursor-default" : "cursor-crosshair"
-                }`}
-                onClick={handleSvgClick}
-              >
-                <g>
-                  {/* line button */}
-                  {lineups?.map((lineup) => {
-                    const lineupUrl = `/lineups/${mapSlug}/${nade || "all"}/${lineup.id}`;
-                    const isSelected = lineup.id === Number(lineupSlug);
-                    const pathD = lineup.points
-                      .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
-                      .join(" ");
+                {/* lineups overlay */}
+                <svg
+                  ref={svgRef}
+                  viewBox={`0 0 ${mapWidth} ${mapHeight}`}
+                  className={`absolute inset-0 h-full w-full touch-none ${
+                    isReadOnly ? "cursor-default" : "cursor-crosshair"
+                  }`}
+                  onClick={handleSvgClick}
+                >
+                  <g>
+                    {/* line button */}
+                    {lineups?.map((lineup) => {
+                      const lineupUrl = `/lineups/${mapSlug}/${nadeType || "all"}/${lineup.id}`;
+                      const isSelected = lineup.id === Number(lineupSlug);
+                      const pathD = lineup.points
+                        .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
+                        .join(" ");
 
-                    return (
-                      <g key={`lineup-${lineup.id}`} className="group">
-                        {/* Hitbox Path */}
-                        <path
-                          d={pathD}
-                          fill="none"
-                          stroke="transparent"
-                          strokeWidth={30}
-                          className="peer cursor-pointer"
-                          onClick={() => router.push(lineupUrl)}
-                        />
+                      return (
+                        <g key={`lineup-${lineup.id}`} className="group">
+                          {/* Hitbox Path */}
+                          <path
+                            d={pathD}
+                            fill="none"
+                            stroke="transparent"
+                            strokeWidth={30}
+                            className="peer cursor-pointer"
+                            onClick={() => router.push(lineupUrl)}
+                          />
 
-                        {/* Visible Path */}
-                        <path
-                          d={pathD}
-                          fill="none"
-                          strokeWidth={isSelected ? "4" : "2"}
-                          strokeDasharray="4 4"
-                          className={twMerge(
-                            "pointer-events-none stroke-4 opacity-40 transition-all [stroke-dasharray:4_4] group-hover:opacity-100",
-                            isSelected && "opacity-100",
-                            lineup.type === "smoke" && "stroke-nade-smoke",
-                            lineup.type === "molly" && "stroke-nade-molly",
-                            lineup.type === "he" && "stroke-nade-he",
-                            lineup.type === "flash" && "stroke-nade-flash",
+                          {/* Visible Path */}
+                          <path
+                            d={pathD}
+                            fill="none"
+                            strokeWidth={isSelected ? "4" : "2"}
+                            strokeDasharray="4 4"
+                            className={twMerge(
+                              "pointer-events-none stroke-4 opacity-40 transition-all [stroke-dasharray:4_4] group-hover:opacity-100",
+                              isSelected && "opacity-100",
+                              lineup.type === "smoke" && "stroke-nade-smoke",
+                              lineup.type === "molly" && "stroke-nade-molly",
+                              lineup.type === "he" && "stroke-nade-he",
+                              lineup.type === "flash" && "stroke-nade-flash",
+                            )}
+                          />
+
+                          {/* Animation Circle */}
+                          {isSelected && (
+                            <circle
+                              r="4"
+                              fill={
+                                {
+                                  smoke: "#fff",
+                                  molly: "#f97316",
+                                  he: "#22c55e",
+                                  flash: "#3b82f6",
+                                }[lineup.type]
+                              }
+                              className="shadow-lg"
+                            >
+                              <animateMotion
+                                dur={`${lineup.duration}s`}
+                                repeatCount="indefinite"
+                                path={pathD}
+                                calcMode="spline"
+                                keyTimes="0; 1"
+                                keySplines="0.3 0.8 0.4 1"
+                              />
+                            </circle>
                           )}
-                        />
 
-                        {/* Animation Circle */}
-                        {isSelected && (
-                          <circle
-                            r="4"
-                            fill={
-                              {
-                                smoke: "#fff",
-                                molly: "#f97316",
-                                he: "#22c55e",
-                                flash: "#3b82f6",
-                              }[lineup.type]
-                            }
-                            className="shadow-lg"
-                          >
-                            <animateMotion
-                              dur={`${lineup.duration}s`}
-                              repeatCount="indefinite"
-                              path={pathD}
-                              calcMode="spline"
-                              keyTimes="0; 1"
-                              keySplines="0.3 0.8 0.4 1"
+                          {/* Start Position */}
+                          {lineup.points.length > 0 && (
+                            <circle
+                              cx={lineup.points[0].x}
+                              cy={lineup.points[0].y}
+                              r="5"
+                              className={twMerge(
+                                "peer-hover:r-7 opacity-75 transition-all hover:cursor-pointer",
+                                lineup.type === "smoke" && "fill-nade-smoke",
+                                lineup.type === "molly" && "fill-nade-molly",
+                                lineup.type === "he" && "fill-nade-he",
+                                lineup.type === "flash" && "fill-nade-flash",
+                              )}
+                              onClick={() => {
+                                router.push(lineupUrl);
+                              }}
                             />
-                          </circle>
-                        )}
+                          )}
 
-                        {/* Start Position */}
-                        {lineup.points.length > 0 && (
-                          <circle
-                            cx={lineup.points[0].x}
-                            cy={lineup.points[0].y}
-                            r="5"
-                            className={twMerge(
-                              "peer-hover:r-7 opacity-75 transition-all hover:cursor-pointer",
-                              lineup.type === "smoke" && "fill-nade-smoke",
-                              lineup.type === "molly" && "fill-nade-molly",
-                              lineup.type === "he" && "fill-nade-he",
-                              lineup.type === "flash" && "fill-nade-flash",
-                            )}
-                            onClick={() => {
-                              router.push(lineupUrl);
-                            }}
-                          />
-                        )}
-
-                        {/* End Position */}
-                        {lineup.points.length > 1 && (
-                          <circle
-                            cx={lineup.points[lineup.points.length - 1].x}
-                            cy={lineup.points[lineup.points.length - 1].y}
-                            r={lineup.type === "smoke" ? "35" : "5"}
-                            className={twMerge(
-                              "peer-hover:r-10 transition-all hover:cursor-pointer",
-                              lineup.type === "smoke" &&
-                                "fill-nade-smoke opacity-50",
-                              lineup.type === "molly" && "fill-nade-molly",
-                              lineup.type === "he" && "fill-nade-he",
-                              lineup.type === "flash" && "fill-nade-flash",
-                            )}
-                            onClick={() => {
-                              router.push(lineupUrl);
-                            }}
-                          />
-                        )}
-                      </g>
-                    );
-                  })}
-                </g>
-              </svg>
-            </div>
-          </section>
-        </div>
-      </TransformComponent>
-    </TransformWrapper>
+                          {/* End Position */}
+                          {lineup.points.length > 1 && (
+                            <circle
+                              cx={lineup.points[lineup.points.length - 1].x}
+                              cy={lineup.points[lineup.points.length - 1].y}
+                              r={
+                                lineup.type === "smoke"
+                                  ? "35"
+                                  : lineup.type === "molly"
+                                    ? "25"
+                                    : "5"
+                              }
+                              className={twMerge(
+                                "peer-hover:r-10 transition-all hover:cursor-pointer",
+                                lineup.type === "smoke" &&
+                                  "fill-nade-smoke opacity-50",
+                                lineup.type === "molly" &&
+                                  "fill-nade-molly opacity-50",
+                                lineup.type === "he" && "fill-nade-he",
+                                lineup.type === "flash" && "fill-nade-flash",
+                              )}
+                              onClick={() => {
+                                router.push(lineupUrl);
+                              }}
+                            />
+                          )}
+                        </g>
+                      );
+                    })}
+                  </g>
+                </svg>
+              </div>
+            </section>
+          </div>
+        </TransformComponent>
+      </TransformWrapper>
+    </div>
   );
 };
 
