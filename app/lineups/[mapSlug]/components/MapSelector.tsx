@@ -19,11 +19,15 @@ const MapSelector = ({
       {maps.map((map) => (
         <Link
           key={map.name}
-          href={`/lineups/${map.slug}/all`}
+          href={map.enabled ? `/lineups/${map.slug}/all` : "#"}
           className={twMerge(
             "hover:bg-primary flex h-full items-center gap-1 px-2 whitespace-nowrap",
             mapSlug === map.slug ? "bg-primary" : "",
+            !map.enabled
+              ? "pointer-events-none cursor-not-allowed opacity-50"
+              : "",
           )}
+          title={!map.enabled ? "Coming soon" : map.name}
         >
           <Image
             src={map.emblemUrl}
