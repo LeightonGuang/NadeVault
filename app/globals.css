@@ -3,8 +3,6 @@
 * {
   box-sizing: border-box;
   color-scheme: dark;
-  --nav-height: 4rem;
-  --max-width: 80rem;
   --button-radius: 0.75rem;
   --button-clip-path: polygon(
     var(--button-radius) 0,
@@ -26,6 +24,10 @@ H = Hue (0-360)     | The angle on the color wheel (0° = red, 120° = green, 24
 */
 
 @theme {
+  --spacing-nav-height: 4rem;
+  --spacing-section-max-width: 80rem;
+  --spacing-section: calc(100dvh - var(--spacing-nav-height));
+
   --color-primary: oklch(0.5519 0.1972 23.06); /*#cc2936*/
   --color-cs-blue: #26397e;
   --color-background: oklch(0.2 0 0);
