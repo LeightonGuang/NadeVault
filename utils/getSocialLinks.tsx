@@ -3,7 +3,7 @@ import {
   TiktokLogoSvg,
   YoutubeLogoSvg,
   InstagramLogoSvg,
-} from "@/assets/icons";
+} from "@/assets/logos";
 
 const getSocialLinks = () => [
   {
@@ -13,7 +13,7 @@ const getSocialLinks = () => [
   },
   {
     name: "TikTok",
-    url: "https://x.com/@NadeVaultgg",
+    url: "https://tiktok.com/@NadeVault",
     icon: <TiktokLogoSvg />,
   },
   {

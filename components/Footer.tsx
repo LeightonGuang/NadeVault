@@ -46,7 +46,12 @@ const Footer = () => {
           {/* Socials */}
           <div>
             <h3 className="mb-3 text-sm font-bold tracking-wider text-zinc-400 uppercase">
-              Follow Us
+              <Link
+                href="/socials"
+                className="transition-colors hover:text-white"
+              >
+                Socials
+              </Link>
             </h3>
             <div className="flex gap-4">
               {socialLinks.map((link) => (
