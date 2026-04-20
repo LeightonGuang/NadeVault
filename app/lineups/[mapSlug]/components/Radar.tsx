@@ -54,14 +54,19 @@ const Radar = ({
   }, [points]);
 
   return (
-    <div className={className}>
+    <div
+      className={twMerge(
+        "min-h-0 flex-1 overflow-hidden border border-white/5 bg-black/25",
+        className,
+      )}
+    >
       <TransformWrapper>
         <TransformComponent
-          wrapperClass="!h-full !w-max aspect-square"
-          contentClass="!h-full !w-max"
+          wrapperClass="!h-full !w-full"
+          contentClass="!h-full !w-full flex items-center justify-center"
         >
-          <div className="h-full w-max">
-            <section className="relative flex h-full w-max flex-col items-center justify-center p-4">
+          <div className="flex h-full w-full items-center justify-center">
+            <section className="relative flex h-full w-full flex-col items-center justify-center p-4">
               {/* Toolbar */}
               {!isReadOnly ? (
                 <div className="absolute top-4 left-4 z-10 flex gap-2">
@@ -91,16 +96,15 @@ const Radar = ({
                 )
               )}
 
-              <div className="relative aspect-square h-full max-h-full max-w-full">
+              <div className="relative aspect-square h-full w-full max-h-full max-w-full">
                 <div className="relative h-full w-full">
                   <Image
-                    className={`pointer-events-none aspect-square object-contain select-none`}
+                    className="pointer-events-none aspect-square h-full w-full object-contain select-none"
                     draggable={false}
                     src={`/radar/${mapSlug}.png`}
                     alt={mapSlug}
                     width={mapWidth}
                     height={mapHeight}
-                    layout="intrinsic"
                     priority
                   />
                 </div>
@@ -129,9 +133,10 @@ const Radar = ({
                           <path
                             d={pathD}
                             fill="none"
-                            stroke="transparent"
+                            stroke="white"
+                            strokeOpacity={0}
                             strokeWidth={30}
-                            className="peer cursor-pointer"
+                            className="peer cursor-pointer touch-manipulation"
                             onClick={() => router.push(lineupUrl)}
                           />
 
@@ -183,7 +188,7 @@ const Radar = ({
                               cy={lineup.points[0].y}
                               r="5"
                               className={twMerge(
-                                "peer-hover:r-7 opacity-75 transition-all hover:cursor-pointer",
+                                "peer-hover:r-7 opacity-75 transition-all cursor-pointer",
                                 lineup.type === "smoke" && "fill-nade-smoke",
                                 lineup.type === "molly" && "fill-nade-molly",
                                 lineup.type === "he" && "fill-nade-he",
@@ -208,7 +213,7 @@ const Radar = ({
                                     : "5"
                               }
                               className={twMerge(
-                                "peer-hover:r-10 transition-all hover:cursor-pointer",
+                                "peer-hover:r-10 transition-all cursor-pointer",
                                 lineup.type === "smoke" &&
                                   "fill-nade-smoke opacity-50",
                                 lineup.type === "molly" &&
