@@ -51,7 +51,7 @@ const HeroSection = () => {
           />
 
           {/* optional glow */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-red-500/10 via-transparent to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-tr from-red-500/10 via-transparent to-transparent" />
         </div>
       </div>
     </section>
