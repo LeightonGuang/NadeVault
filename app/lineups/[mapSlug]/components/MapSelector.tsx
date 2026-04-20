@@ -15,13 +15,13 @@ const MapSelector = ({
   const maps = getMaps();
 
   return (
-    <div className={twMerge("flex h-8 w-full items-center px-2", className)}>
+    <div className={twMerge("flex h-10 w-full overflow-x-auto", className)}>
       {maps.map((map) => (
         <Link
           key={map.name}
           href={map.enabled ? `/lineups/${map.slug}/all` : "#"}
           className={twMerge(
-            "hover:bg-primary flex h-full items-center gap-1 px-2 whitespace-nowrap",
+            "hover:bg-primary flex h-full w-max shrink-0 items-center gap-1 px-2 whitespace-nowrap",
             mapSlug === map.slug ? "bg-primary" : "",
             !map.enabled
               ? "pointer-events-none cursor-not-allowed opacity-50"
