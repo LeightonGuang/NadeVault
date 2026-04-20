@@ -3,11 +3,11 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <section className="max-w-section-max-width h-section relative mx-auto flex items-center px-6">
+    <section className="max-w-section-max-width min-h-section relative mx-auto flex items-center px-6">
       <div className="flex w-full flex-col items-center gap-12 md:flex-row md:justify-between">
         {/* LEFT SIDE */}
-        <div className="flex max-w-2xl flex-col text-center md:text-left">
-          <h1 className="mb-6 text-4xl font-black tracking-tight uppercase italic md:text-7xl">
+        <div className="flex max-w-2xl flex-col text-left">
+          <h1 className="mt-12 mb-6 text-4xl font-black tracking-tight uppercase italic md:mt-0 md:text-7xl">
             Built by a Competitive Player, <br />
             <span className="text-primary">For Competitive Players</span>
           </h1>
