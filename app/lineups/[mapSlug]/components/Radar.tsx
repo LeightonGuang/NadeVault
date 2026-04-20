@@ -159,7 +159,8 @@ const Radar = ({
                           {/* Animation Circle */}
                           {isSelected && (
                             <circle
-                              r="4"
+                              key={`anim-${lineup.id}`}
+                              r="8"
                               fill={
                                 {
                                   smoke: "#fff",
@@ -168,10 +169,20 @@ const Radar = ({
                                   flash: "#3b82f6",
                                 }[lineup.type]
                               }
-                              className="shadow-lg"
+                              className="pointer-events-none"
+                              style={{
+                                filter: `drop-shadow(0 0 8px ${
+                                  {
+                                    smoke: "rgba(255,255,255,0.8)",
+                                    molly: "rgba(249,115,22,0.8)",
+                                    he: "rgba(34,197,94,0.8)",
+                                    flash: "rgba(59,130,246,0.8)",
+                                  }[lineup.type]
+                                })`,
+                              }}
                             >
                               <animateMotion
-                                dur={`${lineup.duration}s`}
+                                dur={`${lineup.duration || 2}s`}
                                 repeatCount="indefinite"
                                 path={pathD}
                                 calcMode="spline"

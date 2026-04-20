@@ -85,7 +85,7 @@ const RadarAndInfo = ({
           mapSlug={mapSlug}
           isReadOnly={true}
           lineups={lineups}
-          lineupSlug={lineupSlug}
+          lineupSlug={lineupSlug || selectedLineup?.id?.toString()}
           nadeType={nadeType}
         />
       </div>
