@@ -19,16 +19,20 @@ const NadePage = async ({
   const lineup = lineups[0];
 
   return (
-    <section className="h-section flex flex-col">
-      <MapSelector mapSlug={mapSlug} />
+    <section className="h-section flex flex-col overflow-hidden">
+      <div className="border-b border-white/5 bg-black/50 backdrop-blur-md">
+        <MapSelector mapSlug={mapSlug} className="mx-auto" />
+      </div>
 
-      <RadarAndInfo
-        className="max-w-section-max-width"
-        mapSlug={mapSlug}
-        lineups={lineups}
-        selectedLineup={lineup}
-        nadeType={nadeType}
-      />
+      <div className="min-h-0 flex-1 overflow-hidden">
+        <RadarAndInfo
+          className="max-w-section-max-width"
+          mapSlug={mapSlug}
+          lineups={lineups}
+          selectedLineup={lineup}
+          nadeType={nadeType}
+        />
+      </div>
     </section>
   );
 };
