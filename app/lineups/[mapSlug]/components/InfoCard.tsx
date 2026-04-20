@@ -56,7 +56,7 @@ const InfoCard = ({
             <div className="grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
               <div className="space-y-2">
                 <h3 className="text-[10px] font-bold tracking-[0.2em] text-white/40 uppercase">
-                  Difficulty
+                  Precision
                 </h3>
                 <PrecisionMeter precision={lineup.precision} />
               </div>
