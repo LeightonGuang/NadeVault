@@ -15,7 +15,7 @@ const MapSelector = ({
   const maps = getMaps();
 
   return (
-    <div className={twMerge("flex h-10 w-full overflow-x-auto", className)}>
+    <div className={twMerge("flex h-8 w-full overflow-x-auto", className)}>
       {maps.map((map) => (
         <Link
           key={map.name}
