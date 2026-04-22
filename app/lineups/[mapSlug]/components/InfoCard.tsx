@@ -14,7 +14,7 @@ const InfoCard = ({
       {lineup ? (
         <div className="flex flex-col gap-6">
           <header>
-            <h2 className="font-[Hoover] text-2xl font-bold tracking-tight text-white">
+            <h2 className="hidden font-[Hoover] text-2xl font-bold tracking-tight text-white md:block">
               {lineup.name}
             </h2>
             <div className="mt-2 flex items-center gap-3 text-xs font-bold tracking-wider uppercase">
