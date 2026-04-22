@@ -1,13 +1,37 @@
+"use client";
+
 import Link from "next/link";
-import getNavItems from "@/utils/getNavItems";
 import { twMerge } from "tailwind-merge";
+import getNavItems from "@/utils/getNavItems";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const navLinks = getNavItems();
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        navRef.current &&
+        !navRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
 
   return (
-    <nav className="h-nav-height fixed top-0 right-0 left-0 z-50 border-b border-white/5 bg-black/50 backdrop-blur-md">
-      <div className="max-w-section-max-width mx-auto px-4">
+    <nav
+      ref={navRef}
+      className="h-nav-height fixed top-0 right-0 left-0 z-100 border-b border-white/5 bg-black/50 backdrop-blur-md"
+    >
+      <div className="max-w-section-max-width relative z-100 mx-auto px-4">
         <div className="h-nav-height flex items-center justify-between">
           <div className="flex shrink-0 items-center">
             <Link
@@ -21,6 +45,7 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Desktop Menu */}
           <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
             {navLinks.map((link) => (
               <Link
@@ -38,13 +63,99 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="flex items-center space-x-4">
-            <button className="bg-primary transform cursor-pointer px-4 py-2 text-sm font-medium text-white italic shadow-lg shadow-red-900/40 transition-all [clip-path:var(--button-clip-path)] hover:scale-105 hover:bg-red-700 active:scale-95">
-              Get Started
+          {/* Mobile Menu Button */}
+          <div className="flex items-center sm:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="hover:text-primary relative p-2 text-white transition-colors focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <div className="flex h-6 w-6 flex-col items-end justify-center gap-1.5">
+                <motion.span
+                  animate={
+                    isOpen
+                      ? { rotate: 45, y: 7.5, width: "100%" }
+                      : { rotate: 0, y: 0, width: "100%" }
+                  }
+                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  className="h-0.5 bg-current"
+                />
+                <motion.span
+                  animate={
+                    isOpen
+                      ? { opacity: 0, x: 20 }
+                      : { opacity: 1, x: 0, width: "70%" }
+                  }
+                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  className="h-0.5 bg-current"
+                />
+                <motion.span
+                  animate={
+                    isOpen
+                      ? { rotate: -45, y: -7.5, width: "100%" }
+                      : { rotate: 0, y: 0, width: "100%" }
+                  }
+                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  className="h-0.5 bg-current"
+                />
+              </div>
             </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 z-80 bg-black/60 backdrop-blur-sm sm:hidden"
+            />
+
+            {/* Content Overflowing from Header Bottom */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{
+                type: "spring",
+                damping: 25,
+                stiffness: 200,
+              }}
+              className="absolute top-full right-0 left-0 z-90 overflow-hidden border-b border-white/10 bg-zinc-950/95 p-4 shadow-2xl backdrop-blur-2xl sm:hidden"
+            >
+              <div className="flex flex-col space-y-1 p-6">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.label}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.05 + 0.1 }}
+                  >
+                    <Link
+                      href={link.enabled ? link.href : "#"}
+                      onClick={() => setIsOpen(false)}
+                      className={twMerge(
+                        "block rounded-xl px-4 py-4 text-xl font-black tracking-tighter uppercase italic transition-all",
+                        link.enabled
+                          ? "hover:text-primary text-white hover:bg-white/5 active:scale-95"
+                          : "opacity-30",
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
