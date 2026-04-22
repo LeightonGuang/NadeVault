@@ -30,9 +30,9 @@ const RadarAndInfo = ({
 }: {
   mapSlug: MapSlug;
   lineups: Lineup[];
-  selectedLineup: Lineup | undefined;
+  selectedLineup?: Lineup | undefined;
   lineupSlug?: string;
-  nadeType?: NadeType | "all";
+  nadeType: NadeType | "all";
   className?: string;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -75,20 +75,18 @@ const RadarAndInfo = ({
   return (
     <div
       className={twMerge(
-        "relative mx-auto flex h-full min-h-0 w-full flex-1 flex-col overflow-hidden md:flex-row md:gap-8 md:p-4",
+        "relative mx-auto flex h-full flex-col overflow-hidden md:w-max md:flex-row md:gap-8 md:p-4",
         className,
       )}
     >
       {/* ── Radar fills remaining space above drawer ── */}
-      <div className="min-h-0 w-full flex-1 md:h-full">
-        <Radar
-          mapSlug={mapSlug}
-          isReadOnly={true}
-          lineups={lineups}
-          lineupSlug={lineupSlug || selectedLineup?.id?.toString()}
-          nadeType={nadeType}
-        />
-      </div>
+      <Radar
+        mapSlug={mapSlug}
+        isReadOnly={true}
+        lineups={lineups}
+        lineupSlug={lineupSlug || selectedLineup?.id?.toString()}
+        nadeType={nadeType}
+      />
 
       {/* ── Mobile Backdrop ── */}
       <AnimatePresence>
@@ -140,15 +138,18 @@ const RadarAndInfo = ({
       >
         {/* Handle */}
         <div
-          className="flex h-12 w-full shrink-0 cursor-pointer touch-none items-center justify-center"
+          className="flex w-full shrink-0 cursor-pointer touch-none flex-col items-center justify-center px-4 text-2xl"
           onPointerDown={(e) => dragControls.start(e)}
           onClick={() => snapDrawer(!isExpanded)}
         >
-          <div className="h-1.5 w-12 rounded-full bg-white/20" />
+          <div className="mt-4 h-1.5 w-12 rounded-full bg-white/20" />
+          <h2 className="my-2 w-full font-[hoover] font-bold text-white">
+            {selectedLineup?.name || "No lineup selected"}
+          </h2>
         </div>
 
         <div className="flex-1 overflow-y-auto px-4 pb-6">
-          <InfoCard lineup={selectedLineup || lineups[0]} />
+          <InfoCard lineup={selectedLineup} />
         </div>
       </motion.div>
 
@@ -156,7 +157,7 @@ const RadarAndInfo = ({
       <div className="hidden h-full md:block md:w-[400px] lg:w-[450px]">
         <InfoCard
           className="h-full w-full overflow-y-auto border border-white/5 bg-white/5 p-6 backdrop-blur-sm md:rounded-2xl"
-          lineup={selectedLineup || lineups[0]}
+          lineup={selectedLineup}
         />
       </div>
     </div>
