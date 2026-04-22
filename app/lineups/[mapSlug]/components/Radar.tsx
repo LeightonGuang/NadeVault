@@ -19,6 +19,7 @@ const Radar = ({
   lineupSlug,
   nadeType = "all",
   className,
+  onPointsChange,
 }: {
   mapSlug: MapSlug;
   isReadOnly?: boolean;
@@ -26,6 +27,7 @@ const Radar = ({
   lineupSlug?: string;
   nadeType?: NadeType | "all";
   className?: string;
+  onPointsChange?: (points: Point[]) => void;
 }) => {
   const mapWidth = 1024;
   const mapHeight = 1024;
@@ -44,10 +46,15 @@ const Radar = ({
     const x = ((e.clientX - rect.left) / rect.width) * mapWidth;
     const y = ((e.clientY - rect.top) / rect.height) * mapHeight;
 
-    setPoints((prev) => [...prev, { x, y }]);
+    const newPoints = [...points, { x, y }];
+    setPoints(newPoints);
+    onPointsChange?.(newPoints);
   };
 
-  const clearPoints = () => setPoints([]);
+  const clearPoints = () => {
+    setPoints([]);
+    onPointsChange?.([]);
+  };
 
   useEffect(() => {
     console.log({ points });
@@ -56,7 +63,7 @@ const Radar = ({
   return (
     <div
       className={twMerge(
-        "min-h-0 flex-1 overflow-hidden border border-white/5 bg-black/25",
+        "aspect-square h-full overflow-hidden md:rounded-2xl md:border md:border-white/5 md:bg-black/25",
         className,
       )}
     >
@@ -96,7 +103,7 @@ const Radar = ({
                 )
               )}
 
-              <div className="relative aspect-square h-full w-full max-h-full max-w-full">
+              <div className="relative aspect-square w-full">
                 <div className="relative h-full w-full">
                   <Image
                     className="pointer-events-none aspect-square h-full w-full object-contain select-none"
@@ -199,7 +206,7 @@ const Radar = ({
                               cy={lineup.points[0].y}
                               r="5"
                               className={twMerge(
-                                "peer-hover:r-7 opacity-75 transition-all cursor-pointer",
+                                "peer-hover:r-7 cursor-pointer opacity-75 transition-all",
                                 lineup.type === "smoke" && "fill-nade-smoke",
                                 lineup.type === "molly" && "fill-nade-molly",
                                 lineup.type === "he" && "fill-nade-he",
@@ -224,7 +231,7 @@ const Radar = ({
                                     : "5"
                               }
                               className={twMerge(
-                                "peer-hover:r-10 transition-all cursor-pointer",
+                                "peer-hover:r-10 cursor-pointer transition-all",
                                 lineup.type === "smoke" &&
                                   "fill-nade-smoke opacity-50",
                                 lineup.type === "molly" &&
@@ -241,6 +248,33 @@ const Radar = ({
                       );
                     })}
                   </g>
+
+                  {/* New points being edited */}
+                  {!isReadOnly && points.length > 0 && (
+                    <g>
+                      {/* New points path */}
+                      <path
+                        d={points
+                          .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
+                          .join(" ")}
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeDasharray="4 4"
+                        className="opacity-60"
+                      />
+                      {/* New points circles */}
+                      {points.map((p, i) => (
+                        <circle
+                          key={`new-point-${i}`}
+                          cx={p.x}
+                          cy={p.y}
+                          r="5"
+                          className="fill-primary shadow-lg"
+                        />
+                      ))}
+                    </g>
+                  )}
                 </svg>
               </div>
             </section>
