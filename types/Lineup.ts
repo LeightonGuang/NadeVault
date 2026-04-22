@@ -10,7 +10,13 @@ export interface Lineup {
   description: string;
   precision: Precision;
   team: "T" | "CT";
-  throwType: "bounce" | "walk" | "jump";
+  throwType:
+    | "left click throw"
+    | "right click throw"
+    | "jump throw"
+    | "walk throw"
+    | "run throw"
+    | "jump right click throw";
   duration: number;
   youtubeUrl: string;
   points: Point[];
