@@ -19,7 +19,7 @@ export const fetchLineups = async (
             precision: "Very Forgiving",
             team: "T",
             duration: 4,
-            throwType: "bounce",
+            throwType: "left click throw",
             youtubeUrl: "https://www.youtube.com/embed/WwVY1MztYnc",
             points: [
               { x: 500, y: 600 },
@@ -35,7 +35,7 @@ export const fetchLineups = async (
             description: "",
             precision: "Forgiving",
             team: "T",
-            throwType: "bounce",
+            throwType: "left click throw",
             points: [
               { x: 745, y: 480 },
               { x: 795, y: 210 },
@@ -60,7 +60,7 @@ export const fetchLineups = async (
             precision: "Very Forgiving",
             team: "T",
             duration: 3,
-            throwType: "bounce",
+            throwType: "left click throw",
             youtubeUrl: "https://www.youtube.com/embed/WwVY1MztYnc",
             points: [
               { x: 513, y: 615 },
@@ -76,7 +76,7 @@ export const fetchLineups = async (
             description: "",
             precision: "Forgiving",
             team: "T",
-            throwType: "bounce",
+            throwType: "left click throw",
             points: [
               { x: 763, y: 490 },
               { x: 820, y: 210 },
@@ -93,7 +93,7 @@ export const fetchLineups = async (
             description: "",
             precision: "Forgiving",
             team: "T",
-            throwType: "bounce",
+            throwType: "jump throw",
             points: [
               { x: 490, y: 1000 },
               { x: 492, y: 410 },
@@ -109,7 +109,7 @@ export const fetchLineups = async (
             description: "",
             precision: "Forgiving",
             team: "T",
-            throwType: "bounce",
+            throwType: "run throw",
             points: [
               { x: 560, y: 650 },
               { x: 446, y: 550 },
@@ -126,7 +126,7 @@ export const fetchLineups = async (
             description: "",
             precision: "Forgiving",
             team: "T",
-            throwType: "bounce",
+            throwType: "left click throw",
             points: [
               { x: 147, y: 455 },
               { x: 255, y: 245 },
@@ -142,7 +142,7 @@ export const fetchLineups = async (
             description: "",
             precision: "Forgiving",
             team: "T",
-            throwType: "bounce",
+            throwType: "run throw",
             points: [
               { x: 125, y: 455 },
               { x: 75, y: 182 },
@@ -159,7 +159,7 @@ export const fetchLineups = async (
             description: "",
             precision: "Forgiving",
             team: "T",
-            throwType: "jump",
+            throwType: "jump throw",
             points: [
               { x: 615, y: 390 },
               { x: 700, y: 250 },
@@ -175,7 +175,7 @@ export const fetchLineups = async (
             description: "",
             precision: "Forgiving",
             team: "T",
-            throwType: "bounce",
+            throwType: "jump throw",
             points: [
               { x: 748, y: 557 },
               { x: 950, y: 305 },
