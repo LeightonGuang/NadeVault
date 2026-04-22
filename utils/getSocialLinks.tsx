@@ -22,8 +22,8 @@ const getSocialLinks = () => [
     icon: <InstagramLogoSvg />,
   },
   {
-    name: "Twitter",
-    url: "https://twitter.com/NadeVault",
+    name: "X",
+    url: "https://x.com/NadeVault",
     icon: <XLogoSvg />,
   },
 ];
