@@ -62,6 +62,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="text-zinc-500 transition-colors hover:text-white"
                   aria-label={link.name}
+                  title={link.name}
                 >
                   {link.icon}
                 </a>
