@@ -24,6 +24,7 @@ const MapPage = async ({
           mapSlug={mapSlug}
           lineups={lineups}
           selectedLineup={lineups[0]}
+          nadeType="all"
         />
       </div>
     </section>
