@@ -36,7 +36,7 @@ const Navbar = () => {
           <div className="flex shrink-0 items-center">
             <Link
               href="/home"
-              className="font-[Hoover] text-2xl font-bold tracking-tight uppercase transition-all duration-200 hover:scale-102"
+              className="font-[Hoover] text-2xl font-bold tracking-tight uppercase transition-all duration-200"
             >
               <h1>
                 <span className="text-primary leading-none">Nade</span>
