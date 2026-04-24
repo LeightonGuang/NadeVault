@@ -1,41 +1,97 @@
 import { Metadata } from "next";
+import PrecisionMeter from "../lineups/components/PrecisionMeter";
 
 export const metadata: Metadata = {
   title: "Tips | Nade Vault",
-  description:
-    "Learn essential CS2 grenade throwing mechanics including jumpthrows, walkthrows, and more.",
+  description: "Tips for anything CS2 related and more.",
 };
 
 const tips = [
   {
-    id: "",
+    id: "precision-scale",
     title: "Precision scale",
-    content: ``,
+    content: (
+      <div className="space-y-6">
+        <p>
+          The precision scale indicates how much room for error a specific
+          lineup allows. Higher precision requirements mean you need to be more
+          exact with your crosshair placement and movement to ensure the utility
+          lands correctly.
+        </p>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {[
+            {
+              scale: "Very Forgiving" as const,
+              desc: "Can be in the general vicinity of the starting position and aim at a broad area. small deviation from the reference point won't affect the lineup.",
+            },
+            {
+              scale: "Forgiving" as const,
+              desc: "Player must stand relatively accurately in the starting position, with minor leeway on aiming at the reference point",
+            },
+            {
+              scale: "Precise" as const,
+              desc: "Even small deviations from the reference point can cause the throw to fail, requiring careful aim and positioning.",
+            },
+            {
+              scale: "Pixel Perfect" as const,
+              desc: "Any deviation from the starting position and reference point will cause the throw to fail.",
+            },
+          ].map((item) => (
+            <div
+              key={item.scale}
+              className="flex flex-col gap-3 rounded-xl border border-white/5 bg-white/5 p-4"
+            >
+              <div className="w-20">
+                <PrecisionMeter scale={item.scale} />
+              </div>
+              <div className="text-md leading-relaxed text-zinc-400">
+                {item.desc}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ),
   },
   {
-    id: "jumpthrow",
-    title: "Jumpthrow",
-    content: `A jumpthrow is used to launch a grenade much further than a standard standing throw by releasing it at the apex of a jump. In CS2, jumpthrows are modernized: if you press jump and throw within a small window, the grenade will have perfect consistency without needing a specialized bind.`,
-  },
-  {
-    id: "walk-jumpthrow",
-    title: "Walk-Jumpthrow",
-    content: `By walking forward and initiating a jumpthrow simultaneously, you add your movement speed to the grenade's initial velocity. This provides even greater distance than a standard jumpthrow and is often used for 'instant' smokes from spawn or very deep entry flashes.`,
-  },
-  {
-    id: "middle-click-throw",
-    title: "Middle-Click Throw",
-    content: `CS2 features three standard release strengths. While Left-click is far and Right-click is close, clicking both at the same time results in a medium-strength toss. This is useful for 'pop-flashes' over walls or smokes that need to land just a few meters in front of you.`,
-  },
-  {
-    id: "crouch-throw",
-    title: "Crouching Throw",
-    content: `Throwing while crouching lowers your release height. This is often used to slide grenades under obstacles, through small gaps, or to ensure they bounce off the ground at a specific angle to land in tight cubbies.`,
-  },
-  {
-    id: "run-throw",
-    title: "Run-Throw",
-    content: `A run-throw involves releasing the grenade while at full running speed. This drastically increases the forward distance but is much harder to time correctly for specific lineups. Professional lineups often substitute this for a 'walk-jumpthrow'.`,
+    id: "nade-throws",
+    title: "Nade throws",
+    content: (
+      <div className="flex flex-col gap-2">
+        <div>
+          <p className="text-xs font-medium text-zinc-500 italic">
+            Note: There is no need for a specialized jumpthrow bind in CS2. The
+            mechanic is built-in, and the game provides a distinctive audio cue
+            whenever a jumpthrow is timed correctly to confirm its consistency.
+          </p>
+        </div>
+
+        <div>
+          <h3 className="text-md font-bold text-white">Jumpthrow</h3>
+
+          <p className="text-md leading-relaxed text-zinc-400">
+            A jumpthrow is used to launch a grenade much further than a standard
+            standing throw by releasing it at the apex of a jump. In CS2,
+            jumpthrows are modernized: if you press jump and throw within a
+            small window, the grenade will have perfect consistency without
+            needing a specialized bind.
+          </p>
+          {/* TODO: Add jumpthrow keyboard and mouse animation */}
+        </div>
+
+        <div>
+          <h3 className="text-md font-bold text-white">Walk Jumpthrow</h3>
+
+          <p className="text-md leading-relaxed text-zinc-400">
+            By walking forward and initiating a jumpthrow simultaneously, you
+            add your movement speed to the grenade's initial velocity. This
+            provides even greater distance than a standard jumpthrow and is
+            often used for 'instant' smokes from spawn or very deep entry
+            flashes.
+          </p>
+        </div>
+      </div>
+    ),
   },
 ];
 
@@ -62,40 +118,17 @@ const TipsPage = () => {
 
         {/* Content Section */}
         <div className="space-y-12">
-          <h2 className="text-primary mb-8 text-[10px] font-black tracking-[0.4em] uppercase">
-            Utility Release Types
-          </h2>
-
           <div className="space-y-10">
             {tips.map((mechanic) => (
               <div key={mechanic.id} className="relative">
-                <h3 className="mb-2 text-lg font-bold text-white transition-colors">
+                <h2 className="mb-2 text-xl font-bold text-white transition-colors">
                   {mechanic.title}
-                </h3>
-                <p className="text-md leading-relaxed text-zinc-400">
-                  {mechanic.content}
-                </p>
+                </h2>
+
+                {mechanic.content}
               </div>
             ))}
           </div>
-
-          <div className="mt-12 border-t border-white/5 pt-8">
-            <p className="text-[10px] font-medium text-zinc-500 italic">
-              Note: CS2 has built-in audio cues for jumpthrows. If you hear a
-              distinctive sound during your throw, it confirms the timing was
-              perfect and consistent.
-            </p>
-          </div>
-        </div>
-
-        {/* Bottom Navigation Link */}
-        <div className="mt-12 text-center">
-          <a
-            href="/lineups/dust2"
-            className="group inline-flex items-center gap-2 text-[10px] font-black tracking-[0.3em] text-zinc-500 uppercase transition-colors hover:text-white"
-          >
-            ← Application of Strategy
-          </a>
         </div>
       </div>
     </section>
