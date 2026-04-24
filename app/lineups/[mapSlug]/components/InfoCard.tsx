@@ -58,7 +58,7 @@ const InfoCard = ({
                 <h3 className="text-[10px] font-bold tracking-[0.2em] text-white/40 uppercase">
                   Precision
                 </h3>
-                <PrecisionMeter precision={lineup.precision} />
+                <PrecisionMeter scale={lineup.precision} />
               </div>
 
               <div className="space-y-2">

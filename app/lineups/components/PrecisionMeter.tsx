@@ -8,8 +8,8 @@ const PRECISION_LEVELS: { id: Precision; color: string }[] = [
   { id: "Pixel Perfect", color: "#ef4444" },
 ];
 
-const PrecisionMeter = ({ precision }: { precision: Precision }) => {
-  const currentIndex = PRECISION_LEVELS.findIndex((p) => p.id === precision);
+const PrecisionMeter = ({ scale }: { scale: Precision }) => {
+  const currentIndex = PRECISION_LEVELS.findIndex((p) => p.id === scale);
   const activeLevel =
     currentIndex !== -1 ? PRECISION_LEVELS[currentIndex] : PRECISION_LEVELS[0];
 
@@ -41,7 +41,7 @@ const PrecisionMeter = ({ precision }: { precision: Precision }) => {
           className="text-[11px] font-bold tracking-tight transition-colors duration-300"
           style={{ color: activeLevel.color }}
         >
-          {precision}
+          {scale}
         </span>
       </div>
     </div>
