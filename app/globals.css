@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  box-sizing: border-box;
+  color-scheme: dark;
+  --button-radius: 0.75rem;
+  --button-clip-path: polygon(
+    var(--button-radius) 0,
+    100% 0,
+    100% calc(100% - var(--button-radius)),
+    calc(100% - var(--button-radius)) 100%,
+    0 100%,
+    0 var(--button-radius)
+  );
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/*  ============= USE OKLCH COLORS =============
+Use this link to test colours: https://oklch.com
+Convert hsl to oklch: https://atmos.style/color-converter/hsl-to-oklch
+
+L = Lightness (0-1) | How light or dark the color is (0 = black, 100 = white)
+C = Chroma (0-0.37) | How intense or vivid the color is (0 = gray, higher = more saturated)
+H = Hue (0-360)     | The angle on the color wheel (0° = red, 120° = green, 240° = blue, etc.)
+*/
+
+@theme {
+  --spacing-nav-height: 4rem;
+  --spacing-section-max-width: 80rem;
+  --spacing-section: calc(100dvh - var(--spacing-nav-height));
+
+  --color-primary: oklch(0.5519 0.1972 23.06); /*#cc2936*/
+  --color-cs-blue: #26397e;
+  --color-background: oklch(0.2 0 0);
+  --color-cs-yellow: #ffad01;
+  --color-success-text: oklch(64.3% 0.205 148.9);
+  --color-success-bg: oklch(90% 0.205 148.9);
+  --color-success-border: oklch(64.3% 0.205 148.9);
+  --color-warning-text: oklch(64.3% 0.205 26.9);
+  --color-warning-bg: oklch(90% 0.205 26.9);
+  --color-warning-border: oklch(64.3% 0.205 26.9);
+
+  --color-nade-smoke: #ffffff;
+  --color-nade-he: #22c55e;
+  --color-nade-molly: #f97316;
+  --color-nade-flash: #3b82f6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  [data-theme="dark"] {
   }
 }
 
+@font-face {
+  font-family: "Hoover";
+  src: url("/fonts/Hoover/Hoover-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi/Satoshi-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Satoshi", sans-serif;
 }
