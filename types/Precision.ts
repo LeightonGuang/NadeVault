@@ -1,5 +1,1 @@
-export type Precision =
-  | "Very Forgiving"
-  | "Forgiving"
-  | "Precise"
-  | "Pixel Perfect";
+export type Precision = 1 | 2 | 3 | 4;

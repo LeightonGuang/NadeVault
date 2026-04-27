@@ -8,6 +8,12 @@ export interface Lineup {
   mapSlug: MapSlug;
   type: "flash" | "smoke" | "molly" | "he";
   description: string;
+  /**
+   * - 1 = Very Forgiving
+   * - 2 = Forgiving
+   * - 3 = Precise
+   * - 4 = Pixel Perfect
+   */
   precision: Precision;
   team: "T" | "CT";
   throwType:

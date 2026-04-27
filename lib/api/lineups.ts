@@ -57,7 +57,7 @@ export const fetchLineups = async (
             type: "smoke",
             name: "Xbox smoke from top mid",
             description: "",
-            precision: "Very Forgiving",
+            precision: 1,
             team: "T",
             duration: 3,
             throwType: "left click throw",
@@ -74,7 +74,7 @@ export const fetchLineups = async (
             type: "smoke",
             name: "A Cross smoke from blue",
             description: "",
-            precision: "Forgiving",
+            precision: 2,
             team: "T",
             throwType: "left click throw",
             points: [
@@ -91,7 +91,7 @@ export const fetchLineups = async (
             type: "smoke",
             name: "Xbox Smoke from T Spawn",
             description: "",
-            precision: "Forgiving",
+            precision: 2,
             team: "T",
             throwType: "jump throw",
             points: [
@@ -107,7 +107,7 @@ export const fetchLineups = async (
             type: "smoke",
             name: "Xbox smoke from top mid",
             description: "",
-            precision: "Forgiving",
+            precision: 2,
             team: "T",
             throwType: "run throw",
             points: [
@@ -124,7 +124,7 @@ export const fetchLineups = async (
             type: "smoke",
             name: "B door smoke from upper tunnel",
             description: "",
-            precision: "Forgiving",
+            precision: 2,
             team: "T",
             throwType: "left click throw",
             points: [
@@ -140,7 +140,7 @@ export const fetchLineups = async (
             type: "flash",
             name: "B flash from upper tunnel",
             description: "",
-            precision: "Forgiving",
+            precision: 1,
             team: "T",
             throwType: "run throw",
             points: [
@@ -157,7 +157,7 @@ export const fetchLineups = async (
             type: "flash",
             name: "A flash from short",
             description: "",
-            precision: "Forgiving",
+            precision: 1,
             team: "T",
             throwType: "jump throw",
             points: [
@@ -173,7 +173,7 @@ export const fetchLineups = async (
             type: "molly",
             name: "Car molotov from A long",
             description: "",
-            precision: "Forgiving",
+            precision: 1,
             team: "T",
             throwType: "jump throw",
             points: [
