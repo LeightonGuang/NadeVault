@@ -3,7 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
+import PrecisionMeter from "./PrecisionMeter";
 import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
@@ -31,11 +33,15 @@ const Radar = ({
   onPointsChange?: (points: Point[]) => void;
   points?: Point[];
 }) => {
+  const [hoveredLineup, setHoveredLineup] = useState<Lineup | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
   const mapWidth = 1024;
   const mapHeight = 1024;
   const svgRef = useRef<SVGSVGElement>(null);
   const [internalPoints, setInternalPoints] = useState<Point[]>([]);
-  const points = controlledPoints !== undefined ? controlledPoints : internalPoints;
+  const points =
+    controlledPoints !== undefined ? controlledPoints : internalPoints;
 
   const updatePoints = (newPoints: Point[]) => {
     if (controlledPoints !== undefined) {
@@ -78,7 +84,7 @@ const Radar = ({
   return (
     <div
       className={twMerge(
-        "aspect-square h-full w-auto mx-auto overflow-hidden md:rounded-2xl md:border md:border-white/5 md:bg-black/25",
+        "mx-auto aspect-square h-full w-auto overflow-hidden md:rounded-2xl md:border md:border-white/5 md:bg-black/25",
         className,
       )}
     >
@@ -96,7 +102,6 @@ const Radar = ({
             >
               <div className="flex h-full w-full items-center justify-center">
                 <section className="relative flex h-full w-full flex-col items-center justify-center p-4">
-
                   <div className="relative aspect-square w-full">
                     <div className="relative h-full w-full">
                       <Image
@@ -141,6 +146,11 @@ const Radar = ({
                                 strokeWidth={30}
                                 className="peer cursor-pointer touch-manipulation"
                                 onClick={() => router.push(lineupUrl)}
+                                onMouseEnter={() => setHoveredLineup(lineup)}
+                                onMouseLeave={() => setHoveredLineup(null)}
+                                onMouseMove={(e) =>
+                                  setMousePos({ x: e.clientX, y: e.clientY })
+                                }
                               />
 
                               {/* Visible Path */}
@@ -353,6 +363,29 @@ const Radar = ({
           </div>
         )}
       </TransformWrapper>
+
+      <AnimatePresence>
+        {hoveredLineup && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 10 }}
+            style={{
+              position: "fixed",
+              left: mousePos.x + 15,
+              top: mousePos.y + 15,
+              pointerEvents: "none",
+              zIndex: 100,
+            }}
+            className="w-48 rounded-xl border border-white/10 bg-black/80 p-3 shadow-2xl backdrop-blur-md"
+          >
+            <p className="mb-2 text-xs font-bold tracking-widest text-white/50 uppercase">
+              Precision
+            </p>
+            <PrecisionMeter scale={hoveredLineup.precision} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
