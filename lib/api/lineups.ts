@@ -10,47 +10,47 @@ export const fetchLineups = async (
     return new Promise<Lineup[]>((resolve) => {
       setTimeout(() => {
         resolve([
-          {
-            id: 1,
-            mapSlug: "dust2",
-            type: "smoke",
-            name: "Xbox smoke from top mid",
-            description: "",
-            precision: "Very Forgiving",
-            team: "T",
-            duration: 4,
-            throwType: "left click throw",
-            youtubeUrl: "https://www.youtube.com/embed/WwVY1MztYnc",
-            points: [
-              { x: 500, y: 600 },
-              { x: 495, y: 380 },
-              { x: 480, y: 400 },
-            ],
-          },
-          {
-            id: 2,
-            mapSlug: "dust2",
-            type: "smoke",
-            name: "A Cross smoke from blue",
-            description: "",
-            precision: "Forgiving",
-            team: "T",
-            throwType: "left click throw",
-            points: [
-              { x: 745, y: 480 },
-              { x: 795, y: 210 },
-              { x: 800, y: 245 },
-            ],
-            duration: 5,
-            youtubeUrl: "https://www.youtube.com/shorts/a0PmqfEjPjA",
-          },
+          // {
+          //   id: 1,
+          //   mapSlug: "dust2",
+          //   type: "smoke",
+          //   name: "Xbox smoke from top mid",
+          //   description: "",
+          //   precision: "Very Forgiving",
+          //   team: "T",
+          //   duration: 4,
+          //   throwType: "left click throw",
+          //   youtubeUrl: "https://www.youtube.com/embed/WwVY1MztYnc",
+          //   points: [
+          //     { x: 500, y: 600 },
+          //     { x: 495, y: 380 },
+          //     { x: 480, y: 400 },
+          //   ],
+          // },
+          // {
+          //   id: 2,
+          //   mapSlug: "dust2",
+          //   type: "smoke",
+          //   name: "A Cross smoke from blue",
+          //   description: "",
+          //   precision: "Forgiving",
+          //   team: "T",
+          //   throwType: "left click throw",
+          //   points: [
+          //     { x: 745, y: 480 },
+          //     { x: 795, y: 210 },
+          //     { x: 800, y: 245 },
+          //   ],
+          //   duration: 5,
+          //   youtubeUrl: "https://www.youtube.com/embed/vpOWeEQ4sv4",
+          // },
         ]);
       }, 500); // simulate network delay
     });
   } else if (mapSlug === "dust2") {
     return new Promise<Lineup[]>((resolve) => {
       setTimeout(() => {
-        resolve([
+        const allLineups: Lineup[] = [
           {
             id: 1,
             mapSlug: "dust2",
@@ -83,13 +83,13 @@ export const fetchLineups = async (
               { x: 825, y: 245 },
             ],
             duration: 5,
-            youtubeUrl: "https://www.youtube.com/embed/a0PmqfEjPjA",
+            youtubeUrl: "https://www.youtube.com/embed/vpOWeEQ4sv4",
           },
           {
             id: 3,
             mapSlug: "dust2",
             type: "smoke",
-            name: "Xbox smoke from T spawn",
+            name: "Xbox Smoke from T Spawn",
             description: "",
             precision: "Forgiving",
             team: "T",
@@ -99,7 +99,7 @@ export const fetchLineups = async (
               { x: 492, y: 410 },
             ],
             duration: 5,
-            youtubeUrl: "https://www.youtube.com/embed/a0PmqfEjPjA",
+            youtubeUrl: "https://www.youtube.com/embed/t-RZyKreicY",
           },
           {
             id: 4,
@@ -183,8 +183,14 @@ export const fetchLineups = async (
             duration: 1.4,
             youtubeUrl: "https://www.youtube.com/embed/DDG5FzTh47Y",
           },
-        ]);
-      }, 500); // simulate network delay
+        ];
+
+        if (!nadeType || nadeType === "all") {
+          resolve(allLineups);
+        } else {
+          resolve(allLineups.filter((l) => l.type === nadeType));
+        }
+      }, 500);
     });
   } else {
     return [];
