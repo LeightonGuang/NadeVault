@@ -1,5 +1,12 @@
 "use client";
 
+import {
+  CodeIcon,
+  CopyIcon,
+  UndoIcon,
+  TrashIcon,
+  CrosshairIcon,
+} from "@/assets/icons";
 import { useState } from "react";
 import Radar from "../components/Radar";
 import { useParams } from "next/navigation";
@@ -8,61 +15,6 @@ import BackgroundGradient from "@/components/BackgroundGradient";
 
 import { Point } from "@/types/Point";
 import { MapSlug } from "@/types/Map";
-
-const CopyIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-  </svg>
-);
-
-const CrosshairIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    <circle cx="12" cy="12" r="10" />
-    <line x1="22" y1="12" x2="18" y2="12" />
-    <line x1="6" y1="12" x2="2" y2="12" />
-    <line x1="12" y1="6" x2="12" y2="2" />
-    <line x1="12" y1="22" x2="12" y2="18" />
-  </svg>
-);
-
-const CodeIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <polyline points="16 18 22 12 16 6" />
-    <polyline points="8 6 2 12 8 18" />
-  </svg>
-);
 
 const EditLineupPage = () => {
   const params = useParams();
@@ -98,13 +50,14 @@ const EditLineupPage = () => {
             animate={{ opacity: 1, y: 0 }}
             className="group relative flex min-h-0 flex-1 flex-col items-center justify-center lg:col-span-8"
           >
-            <div className="relative h-full aspect-square p-4 md:p-0">
+            <div className="relative aspect-square h-full p-4 md:p-0">
               <div className="from-primary absolute -inset-2 rounded-[2rem] bg-linear-to-r to-blue-600 opacity-0 blur-2xl transition-opacity group-hover:opacity-20" />
               <div className="from-primary absolute -inset-0.5 rounded-2xl bg-linear-to-r to-blue-600 opacity-10 blur-xl transition-opacity group-hover:opacity-20" />
               <Radar
                 mapSlug={mapSlug}
                 isReadOnly={false}
                 lineups={[]}
+                points={points}
                 onPointsChange={setPoints}
                 className="relative z-10 h-full w-full shadow-2xl"
               />
@@ -125,9 +78,27 @@ const EditLineupPage = () => {
                   <CrosshairIcon className="text-primary h-5 w-5" />
                   Map Points
                 </h2>
-                <span className="bg-primary/20 text-primary border-primary/20 rounded-full border px-3 py-1 text-xs font-bold">
-                  {points.length} Points
-                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setPoints(points.slice(0, -1))}
+                    disabled={points.length === 0}
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/5 bg-white/5 text-zinc-400 transition-all hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                    title="Undo Last Point"
+                  >
+                    <UndoIcon />
+                  </button>
+                  <button
+                    onClick={() => setPoints([])}
+                    disabled={points.length === 0}
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/5 bg-white/5 text-zinc-400 transition-all hover:bg-white/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
+                    title="Clear All Points"
+                  >
+                    <TrashIcon />
+                  </button>
+                  <span className="bg-primary/20 text-primary border-primary/20 rounded-full border px-3 py-1 text-xs font-bold">
+                    {points.length}
+                  </span>
+                </div>
               </div>
 
               <div className="space-y-3">
