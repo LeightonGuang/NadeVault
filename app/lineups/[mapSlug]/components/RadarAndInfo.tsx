@@ -7,10 +7,11 @@ import {
   AnimatePresence,
   useDragControls,
 } from "framer-motion";
+import Radar from "./Radar";
+import InfoCard from "./InfoCard";
 import { twMerge } from "tailwind-merge";
-import Radar from "../[mapSlug]/components/Radar";
+import NadeSelector from "./NadeSelector";
 import { useState, useEffect, useRef } from "react";
-import InfoCard from "../[mapSlug]/components/InfoCard";
 
 import { MapSlug } from "@/types/Map";
 import { Lineup } from "@/types/Lineup";
@@ -75,10 +76,14 @@ const RadarAndInfo = ({
   return (
     <div
       className={twMerge(
-        "relative mx-auto flex h-full flex-col overflow-hidden md:w-max md:flex-row md:gap-8 md:p-4",
+        "relative mx-auto flex h-full flex-col md:w-max md:flex-row md:gap-8 md:p-4",
         className,
       )}
     >
+      <div className="absolute top-4 left-4 z-50 md:relative md:top-auto md:left-auto">
+        <NadeSelector mapSlug={mapSlug} currentNadeType={nadeType} />
+      </div>
+
       {/* ── Radar fills remaining space above drawer ── */}
       <Radar
         mapSlug={mapSlug}
