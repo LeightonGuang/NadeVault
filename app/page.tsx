@@ -1,65 +1,101 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+const HomePage = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl leading-10 font-semibold tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-section relative overflow-hidden bg-[#0a0a0b] text-white selection:bg-orange-500/30">
+      {/* Background Ambient Lights */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="absolute top-[-10%] right-[-10%] h-[60%] w-[60%] rounded-full bg-red-600/15 blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] h-[60%] w-[60%] rounded-full bg-red-600/10 blur-[120px]" />
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03]" />
+      </div>
+
+      <main className="max-w-section-max-width relative z-10 mx-auto flex min-h-[calc(100dvh-64px)] flex-col items-center justify-center px-6 py-20 text-center">
+        {/* Badge */}
+        <div className="mb-8 flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
+          <div className="bg-primary h-2 w-2 animate-pulse rounded-full shadow-[0_0_8px_rgba(239,68,68,0.8)]" />
+          <span className="text-[10px] leading-none font-black tracking-[0.2em] text-zinc-400 uppercase">
+            Protocol v2.4 Active
+          </span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="bg-foreground text-background flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 transition-colors hover:bg-[#383838] md:w-[158px] dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* Hero Title */}
+        <h1 className="mb-6 max-w-4xl text-5xl font-black tracking-tighter uppercase italic md:text-8xl">
+          Master Every <br />
+          <span className="text-primary">Tactical Utility</span>
+        </h1>
+
+        {/* Subtitle */}
+        <p className="mb-12 max-w-2xl text-lg leading-relaxed font-medium text-zinc-400 md:text-xl">
+          Elevate your gameplay with pixel-perfect smoke, flash, molly, and
+          grenade lineups for CS2. The ultimate vault for competitive tactical
+          superiority.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <Link
+            href="/lineups"
+            className="group bg-primary relative flex h-14 items-center gap-3 overflow-hidden rounded-sm px-8 font-black tracking-tighter text-white transition-all hover:bg-red-700 active:scale-95"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <span className="relative z-10 text-lg uppercase italic">
+              Browse All Maps
+            </span>
+            <div className="relative z-10 h-5 w-5 leading-none transition-transform group-hover:translate-x-1">
+              {">"}
+            </div>
+            <div className="absolute inset-0 z-0 -translate-x-full bg-linear-to-r from-white/0 via-white/30 to-white/0 transition-transform duration-500 group-hover:translate-x-full" />
+          </Link>
+
+          <Link
+            href="#features"
+            className="group flex h-14 items-center gap-3 rounded-sm border-2 border-white/10 bg-white/5 px-8 font-black tracking-tighter text-white backdrop-blur-md transition-all hover:bg-white/10 active:scale-95 md:border-4"
           >
-            Documentation
-          </a>
+            <span className="text-lg uppercase italic">How it Works</span>
+          </Link>
+        </div>
+
+        {/* Feature Highlights */}
+        <div className="mt-24 grid w-full grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="flex flex-col items-center p-6 text-center">
+            <div className="text-primary mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/10">
+              {/* <Target className="h-6 w-6" /> */}
+            </div>
+            <h3 className="mb-2 font-black tracking-tight uppercase italic">
+              Pixel Perfection
+            </h3>
+            <p className="text-sm text-zinc-500">
+              Every lineup is verified and tested for maximum consistency.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center p-6 text-center">
+            <div className="text-primary mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/10">
+              {/* <Shield className="h-6 w-6" /> */}
+            </div>
+            <h3 className="mb-2 font-black tracking-tight uppercase italic">
+              Global Standards
+            </h3>
+            <p className="text-sm text-zinc-500">
+              Curated from pro matches and high-level competitive play.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center p-6 text-center">
+            <div className="text-primary mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-red-500/10">
+              {/* <Zap className="h-6 w-6" /> */}
+            </div>
+            <h3 className="mb-2 font-black tracking-tight uppercase italic">
+              Rapid Learning
+            </h3>
+            <p className="text-sm text-zinc-500">
+              Interactive maps and concise visuals for fast execution.
+            </p>
+          </div>
         </div>
       </main>
     </div>
   );
-}
+};
+
+export default HomePage;
