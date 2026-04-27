@@ -1,6 +1,6 @@
 import { fetchLineups } from "@/lib/api/lineups";
 import MapSelector from "../../components/MapSelector";
-import RadarAndInfo from "@/app/lineups/components/RadarAndInfo";
+import RadarAndInfo from "@/app/lineups/[mapSlug]/components/RadarAndInfo";
 
 import { MapSlug } from "@/types/Map";
 import { NadeType } from "@/types/Nade";

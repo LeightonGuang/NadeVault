@@ -1,6 +1,6 @@
 import { Lineup } from "@/types/Lineup";
 import { twMerge } from "tailwind-merge";
-import PrecisionMeter from "../../components/PrecisionMeter";
+import PrecisionMeter from "./PrecisionMeter";
 
 const InfoCard = ({
   lineup,
