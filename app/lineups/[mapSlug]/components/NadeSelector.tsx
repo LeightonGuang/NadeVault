@@ -3,7 +3,7 @@
 import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion"; 
+import { motion, AnimatePresence } from "framer-motion";
 
 import { MapSlug } from "@/types/Map";
 import { NadeType } from "@/types/Nade";
@@ -84,11 +84,16 @@ const NadeSelector = ({
 }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   const currentType =
     nadeTypes.find((t) => t.value === currentNadeType) || nadeTypes[0];
 
   // Close dropdown on selection or when clicking outside
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     setIsOpen(false);
   }, [currentNadeType]);
@@ -127,8 +132,7 @@ const NadeSelector = ({
 
       {/* Dropdown Menu / Desktop Sidebar */}
       <AnimatePresence>
-        {(isOpen ||
-          (typeof window !== "undefined" && window.innerWidth >= 768)) && (
+        {(isOpen || (mounted && window.innerWidth >= 768)) && (
           <motion.div
             initial={isOpen ? { opacity: 0, y: -10 } : false}
             animate={{ opacity: 1, y: 0 }}

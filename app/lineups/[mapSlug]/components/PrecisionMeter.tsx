@@ -1,11 +1,11 @@
 import { twMerge } from "tailwind-merge";
 import { Precision } from "@/types/Precision";
 
-const PRECISION_LEVELS: { id: Precision; color: string }[] = [
-  { id: "Very Forgiving", color: "#22c55e" },
-  { id: "Forgiving", color: "#eab308" },
-  { id: "Precise", color: "#f97316" },
-  { id: "Pixel Perfect", color: "#ef4444" },
+const PRECISION_LEVELS: { id: Precision; name: string; color: string }[] = [
+  { id: 1, name: "Very Forgiving", color: "#22c55e" },
+  { id: 2, name: "Forgiving", color: "#eab308" },
+  { id: 3, name: "Precise", color: "#f97316" },
+  { id: 4, name: "Pixel Perfect", color: "#ef4444" },
 ];
 
 const PrecisionMeter = ({ scale }: { scale: Precision }) => {
@@ -41,7 +41,7 @@ const PrecisionMeter = ({ scale }: { scale: Precision }) => {
           className="text-[11px] font-bold tracking-tight transition-colors duration-300"
           style={{ color: activeLevel.color }}
         >
-          {scale}
+          {activeLevel.name}
         </span>
       </div>
     </div>

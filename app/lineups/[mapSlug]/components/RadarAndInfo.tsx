@@ -37,24 +37,20 @@ const RadarAndInfo = ({
   className?: string;
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const isFirstRender = useRef(true);
   const dragControls = useDragControls();
-
-  // Tracks live drag delta so we can add it to the current height
   const dragDelta = useMotionValue(0);
-
-  // The animated drawer height
   const drawerHeight = useMotionValue(PEEK_HEIGHT);
+
+  const prevLineupId = useRef<string | number | undefined>(selectedLineup?.id);
 
   const getTargetHeight = (expanded: boolean) =>
     expanded ? window.innerHeight * (EXPANDED_HEIGHT_VH / 100) : PEEK_HEIGHT;
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    if (selectedLineup && window.innerWidth < 768) {
+    const hasChanged = selectedLineup?.id !== prevLineupId.current;
+    prevLineupId.current = selectedLineup?.id;
+
+    if (hasChanged && selectedLineup && window.innerWidth < 768) {
       setIsExpanded(true);
       animate(drawerHeight, getTargetHeight(true), {
         type: "spring",

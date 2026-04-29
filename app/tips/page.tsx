@@ -1,6 +1,8 @@
 import { Metadata } from "next";
-import PrecisionMeter from "../lineups/[mapSlug]/components/PrecisionMeter";
 import SmoothScrollWrapper from "@/components/SmoothScrollWrapper";
+import PrecisionMeter from "../lineups/[mapSlug]/components/PrecisionMeter";
+
+import { Precision } from "@/types/Precision";
 
 export const metadata: Metadata = {
   title: "Tips | Nade Vault",
@@ -83,28 +85,32 @@ const tips = [
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {[
             {
-              scale: "Very Forgiving" as const,
+              id: 1,
+              name: "Very Forgiving" as const,
               desc: "Can be in the general vicinity of the starting position and aim at a broad area. Small deviation from the reference point won't affect the lineup.",
             },
             {
-              scale: "Forgiving" as const,
+              id: 2,
+              name: "Forgiving" as const,
               desc: "Player must stand relatively accurately in the starting position, with minor leeway on aiming at the reference point.",
             },
             {
-              scale: "Precise" as const,
+              id: 3,
+              name: "Precise" as const,
               desc: "Even small deviations from the reference point can cause the throw to fail, requiring careful aim and positioning.",
             },
             {
-              scale: "Pixel Perfect" as const,
+              id: 4,
+              name: "Pixel Perfect" as const,
               desc: "Any deviation from the starting position and reference point will cause the throw to fail.",
             },
           ].map((item) => (
             <div
-              key={item.scale}
+              key={item.id}
               className="flex items-start gap-4 rounded-xl border border-white/5 bg-white/5 p-3 backdrop-blur-sm"
             >
               <div className="w-16 shrink-0 pt-1">
-                <PrecisionMeter scale={item.scale} />
+                <PrecisionMeter scale={item.id as Precision} />
               </div>
               <div className="text-sm leading-relaxed text-zinc-400">
                 {item.desc}

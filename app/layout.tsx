@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vaulted",
+  title: "Nade Vault",
   description:
-    "Use Vaulted to learn every useful smoke, flash molly and grenades lineups.",
+    "Use Nade Vault to learn every useful smoke, flash molly and grenades lineups.",
 };
 
 export default function RootLayout({
