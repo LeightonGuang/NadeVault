@@ -1,13 +1,15 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
-import PrecisionMeter from "./PrecisionMeter";
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+
+import RadarLineup from "./RadarLineup";
+import RadarTooltip from "./RadarTooltip";
+import RadarToolbar from "./RadarToolbar";
+import RadarEditPoints from "./RadarEditPoints";
 
 import { Point } from "@/types/Point";
 import { MapSlug } from "@/types/Map";
@@ -33,13 +35,14 @@ const Radar = ({
   onPointsChange?: (points: Point[]) => void;
   points?: Point[];
 }) => {
-  const [hoveredLineup, setHoveredLineup] = useState<Lineup | null>(null);
+  const [scale, setScale] = useState(1);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
+  const [internalPoints, setInternalPoints] = useState<Point[]>([]);
+  const [hoveredLineup, setHoveredLineup] = useState<Lineup | null>(null);
   const mapWidth = 1024;
   const mapHeight = 1024;
+
   const svgRef = useRef<SVGSVGElement>(null);
-  const [internalPoints, setInternalPoints] = useState<Point[]>([]);
   const points =
     controlledPoints !== undefined ? controlledPoints : internalPoints;
 
@@ -51,12 +54,9 @@ const Radar = ({
       onPointsChange?.(newPoints);
     }
   };
-  const [scale, setScale] = useState(1);
 
   const searchParams = useSearchParams();
   const isAdmin = searchParams.get("admin") === "true";
-
-  const router = useRouter();
 
   const handleSvgClick = (e: React.MouseEvent<SVGSVGElement>) => {
     if (!svgRef.current || isReadOnly) return;
@@ -125,214 +125,37 @@ const Radar = ({
                       onClick={handleSvgClick}
                     >
                       <g>
-                        {/* line button */}
-                        {lineups?.map((lineup) => {
-                          const lineupUrl = `/lineups/${mapSlug}/${nadeType || "all"}/${lineup.id}`;
-                          const isSelected = lineup.id === Number(lineupSlug);
-                          const pathD = lineup.points
-                            .map(
-                              (p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`,
-                            )
-                            .join(" ");
-
-                          return (
-                            <g key={`lineup-${lineup.id}`} className="group">
-                              {/* Hitbox Path */}
-                              <path
-                                d={pathD}
-                                fill="none"
-                                stroke="white"
-                                strokeOpacity={0}
-                                strokeWidth={30}
-                                className="peer cursor-pointer touch-manipulation"
-                                onClick={() => router.push(lineupUrl)}
-                                onMouseEnter={() => setHoveredLineup(lineup)}
-                                onMouseLeave={() => setHoveredLineup(null)}
-                                onMouseMove={(e) =>
-                                  setMousePos({ x: e.clientX, y: e.clientY })
-                                }
-                              />
-
-                              {/* Visible Path */}
-                              <path
-                                d={pathD}
-                                fill="none"
-                                strokeWidth={isSelected ? "4" : "2"}
-                                strokeDasharray="4 4"
-                                className={twMerge(
-                                  "pointer-events-none stroke-4 opacity-40 transition-all [stroke-dasharray:4_4] group-hover:opacity-100",
-                                  isSelected && "opacity-100",
-                                  lineup.type === "smoke" &&
-                                    "stroke-nade-smoke",
-                                  lineup.type === "molly" &&
-                                    "stroke-nade-molly",
-                                  lineup.type === "he" && "stroke-nade-he",
-                                  lineup.type === "flash" &&
-                                    "stroke-nade-flash",
-                                )}
-                              />
-
-                              {/* Animation Circle */}
-                              {isSelected && (
-                                <circle
-                                  key={`anim-${lineup.id}`}
-                                  r="8"
-                                  fill={
-                                    {
-                                      smoke: "#fff",
-                                      molly: "#f97316",
-                                      he: "#22c55e",
-                                      flash: "#3b82f6",
-                                    }[lineup.type]
-                                  }
-                                  className="pointer-events-none"
-                                  style={{
-                                    filter: `drop-shadow(0 0 8px ${
-                                      {
-                                        smoke: "rgba(255,255,255,0.8)",
-                                        molly: "rgba(249,115,22,0.8)",
-                                        he: "rgba(34,197,94,0.8)",
-                                        flash: "rgba(59,130,246,0.8)",
-                                      }[lineup.type]
-                                    })`,
-                                  }}
-                                >
-                                  <animateMotion
-                                    dur={`${lineup.duration || 2}s`}
-                                    repeatCount="indefinite"
-                                    path={pathD}
-                                    calcMode="spline"
-                                    keyTimes="0; 1"
-                                    keySplines="0.3 0.8 0.4 1"
-                                  />
-                                </circle>
-                              )}
-
-                              {/* Start Position */}
-                              {lineup.points.length > 0 && (
-                                <circle
-                                  cx={lineup.points[0].x}
-                                  cy={lineup.points[0].y}
-                                  r="5"
-                                  className={twMerge(
-                                    "peer-hover:r-7 cursor-pointer opacity-75 transition-all",
-                                    lineup.type === "smoke" &&
-                                      "fill-nade-smoke",
-                                    lineup.type === "molly" &&
-                                      "fill-nade-molly",
-                                    lineup.type === "he" && "fill-nade-he",
-                                    lineup.type === "flash" &&
-                                      "fill-nade-flash",
-                                  )}
-                                  onClick={() => {
-                                    router.push(lineupUrl);
-                                  }}
-                                />
-                              )}
-
-                              {/* End Position */}
-                              {lineup.points.length > 1 && (
-                                <circle
-                                  cx={lineup.points[lineup.points.length - 1].x}
-                                  cy={lineup.points[lineup.points.length - 1].y}
-                                  r={
-                                    lineup.type === "smoke"
-                                      ? "35"
-                                      : lineup.type === "molly"
-                                        ? "25"
-                                        : "5"
-                                  }
-                                  className={twMerge(
-                                    "peer-hover:r-10 cursor-pointer transition-all",
-                                    lineup.type === "smoke" &&
-                                      "fill-nade-smoke opacity-50",
-                                    lineup.type === "molly" &&
-                                      "fill-nade-molly opacity-50",
-                                    lineup.type === "he" && "fill-nade-he",
-                                    lineup.type === "flash" &&
-                                      "fill-nade-flash",
-                                  )}
-                                  onClick={() => {
-                                    router.push(lineupUrl);
-                                  }}
-                                />
-                              )}
-                            </g>
-                          );
-                        })}
+                        {lineups?.map((lineup) => (
+                          <RadarLineup
+                            key={`lineup-${lineup.id}`}
+                            lineup={lineup}
+                            mapSlug={mapSlug}
+                            nadeType={nadeType}
+                            lineupSlug={lineupSlug}
+                            onHover={setHoveredLineup}
+                            onMousePos={setMousePos}
+                          />
+                        ))}
                       </g>
 
-                      {/* New points being edited */}
-                      {!isReadOnly && points.length > 0 && (
-                        <g>
-                          {/* New points path */}
-                          <path
-                            d={points
-                              .map(
-                                (p, i) =>
-                                  `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`,
-                              )
-                              .join(" ")}
-                            fill="none"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeDasharray="4 4"
-                            className="opacity-60"
-                          />
-                          {/* New points circles */}
-                          {points.map((p, i) => (
-                            <circle
-                              key={`new-point-${i}`}
-                              cx={p.x}
-                              cy={p.y}
-                              r="5"
-                              className="fill-primary shadow-lg"
-                            />
-                          ))}
-                        </g>
-                      )}
+                      <RadarEditPoints
+                        points={points}
+                        isReadOnly={isReadOnly}
+                      />
                     </svg>
                   </div>
                 </section>
               </div>
             </TransformComponent>
 
-            {/* Toolbar - Moved outside TransformComponent to avoid zooming */}
-            {!isReadOnly ? (
-              <div className="absolute top-4 left-4 z-20 flex gap-2">
-                <Link
-                  href={`/lineups/${mapSlug}${isAdmin ? "?admin=true" : ""}`}
-                  className="rounded-lg border border-white/10 bg-zinc-900/40 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:cursor-pointer hover:bg-white/20"
-                >
-                  Back to View
-                </Link>
-                <button
-                  onClick={undoPoints}
-                  disabled={points.length === 0}
-                  className="rounded-lg border border-white/10 bg-zinc-900/40 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:cursor-pointer hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  Undo
-                </button>
-                <button
-                  onClick={clearPoints}
-                  disabled={points.length === 0}
-                  className="rounded-lg border border-white/10 bg-zinc-900/40 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:cursor-pointer hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  Clear Map
-                </button>
-              </div>
-            ) : (
-              isAdmin && (
-                <div className="absolute top-4 left-4 z-20 flex gap-2">
-                  <Link
-                    href={`/lineups/${mapSlug}/edit?admin=true`}
-                    className="rounded-lg border border-white/10 bg-zinc-900/40 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all hover:cursor-pointer hover:bg-white/20"
-                  >
-                    Edit Lineup
-                  </Link>
-                </div>
-              )
-            )}
+            <RadarToolbar
+              isReadOnly={isReadOnly}
+              pointsLength={points.length}
+              mapSlug={mapSlug}
+              isAdmin={isAdmin}
+              onUndo={undoPoints}
+              onClear={clearPoints}
+            />
 
             {/* Reset Zoom Button */}
             {scale > 1.01 && (
@@ -364,28 +187,7 @@ const Radar = ({
         )}
       </TransformWrapper>
 
-      <AnimatePresence>
-        {hoveredLineup && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 10 }}
-            style={{
-              position: "fixed",
-              left: mousePos.x + 15,
-              top: mousePos.y + 15,
-              pointerEvents: "none",
-              zIndex: 100,
-            }}
-            className="w-48 rounded-xl border border-white/10 bg-black/80 p-3 shadow-2xl backdrop-blur-md"
-          >
-            <p className="mb-2 text-xs font-bold tracking-widest text-white/50 uppercase">
-              Precision
-            </p>
-            <PrecisionMeter scale={hoveredLineup.precision} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <RadarTooltip hoveredLineup={hoveredLineup} mousePos={mousePos} />
     </div>
   );
 };
