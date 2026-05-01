@@ -242,7 +242,7 @@ export const fetchLineups = async (
             throwType: "jump throw",
             precision: 2,
             duration: 5,
-            team: "T",
+            team: "CT",
             youtubeUrl: "https://www.youtube.com/embed/eY19M79SHaU",
             points: [
               {
@@ -260,6 +260,36 @@ export const fetchLineups = async (
               {
                 x: 680.4419997247794,
                 y: 577.7261477272056,
+              },
+            ],
+          },
+          {
+            id: 13,
+            name: "Back Site HE/Molly from Window",
+            mapSlug: "dust2",
+            type: "he",
+            description: "",
+            throwType: "left click throw",
+            precision: 3,
+            duration: 1.4,
+            team: "CT",
+            youtubeUrl: "https://www.youtube.com/embed/UCMiCv7qrKo",
+            points: [
+              {
+                x: 269.9822802471597,
+                y: 149.10191349412,
+              },
+              {
+                x: 262.79774765796293,
+                y: 120.03721347418777,
+              },
+              {
+                x: 259.2054813633646,
+                y: 137.9985449471796,
+              },
+              {
+                x: 250.3881004584413,
+                y: 110.56669324297388,
               },
             ],
           },
