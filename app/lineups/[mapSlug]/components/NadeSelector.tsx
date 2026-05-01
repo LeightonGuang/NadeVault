@@ -132,7 +132,7 @@ const NadeSelector = ({
 
       {/* Dropdown Menu / Desktop Sidebar */}
       <AnimatePresence>
-        {(isOpen || (mounted && window.innerWidth >= 768)) && (
+        {(isOpen || !mounted || window.innerWidth >= 768) && (
           <motion.div
             initial={isOpen ? { opacity: 0, y: -10 } : false}
             animate={{ opacity: 1, y: 0 }}
