@@ -29,6 +29,13 @@ const maps: MapItem[] = [
     emblemURL: "/emblem/anubis.png",
   },
   {
+    name: "Cache",
+    slug: "cache",
+    active: false,
+    imgURL: "/map/cache.png",
+    emblemURL: "/emblem/cache.png",
+  },
+  {
     name: "Dust 2",
     slug: "dust2",
     active: true,
