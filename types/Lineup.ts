@@ -22,7 +22,8 @@ export interface Lineup {
     | "jump throw"
     | "walk throw"
     | "run throw"
-    | "jump right click throw";
+    | "jump right click throw"
+    | "crouch jump throw";
   duration: number;
   youtubeUrl: string;
   points: Point[];
