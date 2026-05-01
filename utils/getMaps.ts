@@ -20,6 +20,12 @@ const getMaps = () => {
       enabled: true,
     },
     {
+      name: "Cache",
+      slug: "cache",
+      emblemUrl: "/emblem/cache.png",
+      enabled: true,
+    },
+    {
       name: "Dust 2",
       slug: "dust2",
       emblemUrl: "/emblem/dust2.png",

@@ -135,9 +135,11 @@ const RadarLineup = ({
                 : "5"
           }
           className={twMerge(
-            "peer-hover:r-10 cursor-pointer transition-all",
-            lineup.type === "smoke" && "fill-nade-smoke opacity-50",
-            lineup.type === "molly" && "fill-nade-molly opacity-50",
+            "opacity-0 cursor-pointer transition-all group-hover:opacity-100",
+            isSelected && "opacity-100",
+            lineup.type === "smoke" && "fill-nade-smoke group-hover:opacity-50",
+            lineup.type === "molly" && "fill-nade-molly group-hover:opacity-50",
+            isSelected && (lineup.type === "smoke" || lineup.type === "molly") && "opacity-50",
             lineup.type === "he" && "fill-nade-he",
             lineup.type === "flash" && "fill-nade-flash",
           )}

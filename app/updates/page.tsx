@@ -2,10 +2,21 @@ import Pill from "@/components/Pill";
 
 const updates = [
   {
+    version: "v0.0.3",
+    date: "30/4/2026",
+    title: "The Cache Update",
+    description: "Adding Cache to the list of maps available.",
+    changes: [
+      { type: "new", text: "Added Cache lineups" },
+      { type: "improvement", text: "Updated radar path animations" },
+      { type: "fix", text: "Fixed footer alignment on mobile" },
+    ],
+  },
+  {
     version: "v0.0.2",
-    date: "April 15, 2026",
-    title: "The Mirage Update",
-    description: "Expanding our catalog with one of the most played maps.",
+    date: "17/2/2026",
+    title: "Adding Dust 2 lineups",
+    description: "Expanding our Dust 2 lineups with more utility options.",
     changes: [
       { type: "new", text: "Added Mirage lineups" },
       { type: "improvement", text: "Updated radar path animations" },
@@ -14,7 +25,7 @@ const updates = [
   },
   {
     version: "v0.0.1",
-    date: "April 1, 2026",
+    date: "16/2/2026",
     title: "Initial Release",
     description: "Launch of Nade Vault with support for Dust 2.",
     changes: [

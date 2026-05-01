@@ -215,6 +215,54 @@ export const fetchLineups = async (
               { x: 264.8, y: 225.8 },
             ],
           },
+          {
+            id: 11,
+            name: "Cross Plat Smoke",
+            mapSlug: "dust2",
+            type: "smoke",
+            description: "",
+            throwType: "crouch jump throw",
+            precision: 2,
+            duration: 5,
+            team: "T",
+            youtubeUrl: "https://www.youtube.com/embed/UCMiCv7qrKo",
+            points: [
+              { x: 501.5, y: 428.1 },
+              { x: 427.1, y: 332.4 },
+              { x: 516.5, y: 231.8 },
+              { x: 526.0, y: 234.0 },
+            ],
+          },
+          {
+            id: 12,
+            name: "Long Doors Smoke from A Site",
+            mapSlug: "dust2",
+            type: "smoke",
+            description: "",
+            throwType: "jump throw",
+            precision: 2,
+            duration: 5,
+            team: "T",
+            youtubeUrl: "https://www.youtube.com/embed/eY19M79SHaU",
+            points: [
+              {
+                x: 843.9811009201296,
+                y: 155.93677888161943,
+              },
+              {
+                x: 688.8611467775221,
+                y: 602.9835917020329,
+              },
+              {
+                x: 678.5710781575033,
+                y: 583.338913054945,
+              },
+              {
+                x: 680.4419997247794,
+                y: 577.7261477272056,
+              },
+            ],
+          },
         ];
 
         if (!nadeType || nadeType === "all") {

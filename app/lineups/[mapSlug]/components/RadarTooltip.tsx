@@ -23,7 +23,7 @@ const RadarTooltip = ({ hoveredLineup, mousePos }: RadarTooltipProps) => {
             pointerEvents: "none",
             zIndex: 100,
           }}
-          className="w-48 rounded-xl border border-white/10 bg-black/80 p-3 shadow-2xl backdrop-blur-md"
+          className="hidden w-48 rounded-xl border border-white/10 bg-black/80 p-3 shadow-2xl backdrop-blur-md md:block"
         >
           <p className="mb-2 text-xs font-bold tracking-widest text-white/50 uppercase">
             Precision
