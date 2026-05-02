@@ -8,6 +8,7 @@ import {
   CrosshairIcon,
 } from "@/assets/icons";
 import { useState } from "react";
+import getMaps from "@/utils/getMaps";
 import Radar from "../components/Radar";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,7 +19,7 @@ import { MapSlug } from "@/types/Map";
 
 const EditLineupPage = () => {
   const params = useParams();
-  const mapSlug = (params.mapSlug as MapSlug) || "mirage";
+  const mapSlug = (params.mapSlug as MapSlug) || "dust2";
   const [points, setPoints] = useState<Point[]>([]);
   const [copied, setCopied] = useState(false);
 
@@ -60,6 +61,7 @@ const EditLineupPage = () => {
                 points={points}
                 onPointsChange={setPoints}
                 className="relative z-10 h-full w-full shadow-2xl"
+                radars={getMaps(mapSlug)[0]?.radars || []}
               />
             </div>
           </motion.div>
