@@ -35,7 +35,12 @@ const HeroRadar = () => {
   return (
     <div className="relative aspect-square w-full overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md md:w-auto">
       {mounted && randomMap && (
-        <Radar isReadOnly mapSlug={randomMap.slug} lineups={lineups} />
+        <Radar
+          isReadOnly
+          mapSlug={randomMap.slug}
+          lineups={lineups}
+          radars={getMaps(randomMap.slug)?.[0]?.radars}
+        />
       )}
     </div>
   );
