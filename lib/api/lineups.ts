@@ -62,6 +62,7 @@ export const fetchLineups = async (
             duration: 3,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/WwVY1MztYnc",
+            radarIndex: 0,
             points: [
               { x: 513, y: 615 },
               { x: 500, y: 385 },
@@ -79,6 +80,7 @@ export const fetchLineups = async (
             duration: 5,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/vpOWeEQ4sv4",
+            radarIndex: 0,
             points: [
               { x: 763, y: 490 },
               { x: 820, y: 210 },
@@ -96,6 +98,7 @@ export const fetchLineups = async (
             duration: 5,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/t-RZyKreicY",
+            radarIndex: 0,
             points: [
               { x: 490, y: 1000 },
               { x: 492, y: 410 },
@@ -112,6 +115,7 @@ export const fetchLineups = async (
             duration: 5,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/DDG5FzTh47Y",
+            radarIndex: 0,
             points: [
               { x: 560, y: 650 },
               { x: 446, y: 550 },
@@ -129,6 +133,7 @@ export const fetchLineups = async (
             duration: 5,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/DDG5FzTh47Y",
+            radarIndex: 0,
             points: [
               { x: 147, y: 455 },
               { x: 255, y: 245 },
@@ -145,6 +150,7 @@ export const fetchLineups = async (
             duration: 1.4,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/DDG5FzTh47Y",
+            radarIndex: 0,
             points: [
               { x: 125, y: 455 },
               { x: 75, y: 182 },
@@ -162,6 +168,7 @@ export const fetchLineups = async (
             duration: 1.4,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/DDG5FzTh47Y",
+            radarIndex: 0,
             points: [
               { x: 615, y: 390 },
               { x: 700, y: 250 },
@@ -178,6 +185,7 @@ export const fetchLineups = async (
             duration: 1.4,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/DDG5FzTh47Y",
+            radarIndex: 0,
             points: [
               { x: 748, y: 557 },
               { x: 950, y: 305 },
@@ -194,6 +202,7 @@ export const fetchLineups = async (
             duration: 5,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/ZtwLrYIjcko",
+            radarIndex: 0,
             points: [
               { x: 487.5, y: 884.8 },
               { x: 456.5, y: 370.0 },
@@ -210,6 +219,7 @@ export const fetchLineups = async (
             duration: 10,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/I5b5RUSAWwE",
+            radarIndex: 0,
             points: [
               { x: 264.8, y: 621.1 },
               { x: 264.8, y: 225.8 },
@@ -217,7 +227,7 @@ export const fetchLineups = async (
           },
           {
             id: 11,
-            name: "Cross Plat Smoke",
+            name: "CT Smoke from Xbox",
             mapSlug: "dust2",
             type: "smoke",
             description: "",
@@ -226,6 +236,7 @@ export const fetchLineups = async (
             duration: 5,
             team: "T",
             youtubeUrl: "https://www.youtube.com/embed/UCMiCv7qrKo",
+            radarIndex: 0,
             points: [
               { x: 501.5, y: 428.1 },
               { x: 427.1, y: 332.4 },
@@ -243,7 +254,8 @@ export const fetchLineups = async (
             precision: 2,
             duration: 5,
             team: "CT",
-            youtubeUrl: "https://www.youtube.com/embed/eY19M79SHaU",
+            youtubeUrl: "https://www.youtube.com/embed/c7pIXLHiAaA",
+            radarIndex: 0,
             points: [
               {
                 x: 843.9811009201296,
@@ -265,15 +277,47 @@ export const fetchLineups = async (
           },
           {
             id: 13,
-            name: "Back Site HE/Molly from Window",
+            name: "Under Window Molly from Outside Window",
+            mapSlug: "dust2",
+            type: "molly",
+            description: "",
+            throwType: "left click throw",
+            precision: 2,
+            duration: 1.4,
+            team: "CT",
+            youtubeUrl: "https://www.youtube.com/embed/zAJc2r8iPTg",
+            radarIndex: 0,
+            points: [
+              {
+                x: 269.9822802471597,
+                y: 149.10191349412,
+              },
+              {
+                x: 262.79774765796293,
+                y: 120.03721347418777,
+              },
+              {
+                x: 259.2054813633646,
+                y: 137.9985449471796,
+              },
+              {
+                x: 250.3881004584413,
+                y: 110.56669324297388,
+              },
+            ],
+          },
+          {
+            id: 14,
+            name: "Under Window Nade from Outside Window",
             mapSlug: "dust2",
             type: "he",
             description: "",
             throwType: "left click throw",
-            precision: 3,
+            precision: 2,
             duration: 1.4,
             team: "CT",
-            youtubeUrl: "https://www.youtube.com/embed/UCMiCv7qrKo",
+            youtubeUrl: "https://www.youtube.com/embed/zAJc2r8iPTg",
+            radarIndex: 0,
             points: [
               {
                 x: 269.9822802471597,
