@@ -3,90 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import Pill from "@/components/Pill";
+import getMaps from "@/utils/getMaps";
 import BackgroundGradient from "@/components/BackgroundGradient";
 
-interface MapItem {
-  name: string;
-  slug: string;
-  active: boolean;
-  imgURL: string;
-  emblemURL: string;
-}
-
-const maps: MapItem[] = [
-  {
-    name: "Ancient",
-    slug: "ancient",
-    active: true,
-    imgURL: "/map/ancient.png",
-    emblemURL: "/emblem/ancient.png",
-  },
-  {
-    name: "Anubis",
-    slug: "anubis",
-    active: true,
-    imgURL: "/map/anubis.png",
-    emblemURL: "/emblem/anubis.png",
-  },
-  {
-    name: "Cache",
-    slug: "cache",
-    active: false,
-    imgURL: "/map/cache.png",
-    emblemURL: "/emblem/cache.png",
-  },
-  {
-    name: "Dust 2",
-    slug: "dust2",
-    active: true,
-    imgURL: "/map/dust2.png",
-    emblemURL: "/emblem/dust2.png",
-  },
-  {
-    name: "Inferno",
-    slug: "inferno",
-    active: true,
-    imgURL: "/map/inferno.png",
-    emblemURL: "/emblem/inferno.png",
-  },
-  {
-    name: "Mirage",
-    slug: "mirage",
-    active: true,
-    imgURL: "/map/mirage.png",
-    emblemURL: "/emblem/mirage.png",
-  },
-  {
-    name: "Nuke",
-    slug: "nuke",
-    active: true,
-    imgURL: "/map/nuke.png",
-    emblemURL: "/emblem/nuke.png",
-  },
-  {
-    name: "Overpass",
-    slug: "overpass",
-    active: true,
-    imgURL: "/map/overpass.png",
-    emblemURL: "/emblem/overpass.png",
-  },
-  {
-    name: "Train",
-    slug: "train",
-    active: false,
-    imgURL: "/map/train.png",
-    emblemURL: "/emblem/train.png",
-  },
-  {
-    name: "Vertigo",
-    slug: "vertigo",
-    active: false,
-    imgURL: "/map/vertigo.png",
-    emblemURL: "/emblem/vertigo.png",
-  },
-];
-
 const LineupsPage = () => {
+  const maps = getMaps()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .sort((a, b) => (b.active ? 1 : -1) - (a.active ? 1 : -1));
+
   return (
     <section className="selection:bg-primary/30 bg-background text-foreground min-h-section">
       <BackgroundGradient />
@@ -121,7 +45,7 @@ const LineupsPage = () => {
               {/* Simulated Map Image / Placeholder */}
               <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
                 <img
-                  src={map.imgURL}
+                  src={map.imgUrl}
                   alt={map.name}
                   className="h-full w-full object-cover opacity-80 transition-all duration-500 group-hover:opacity-100"
                 />
@@ -129,7 +53,7 @@ const LineupsPage = () => {
 
               <Image
                 className="absolute top-1/2 left-1/2 z-20 aspect-square h-1/3 w-1/3 -translate-x-1/2 -translate-y-1/2 transform duration-500 group-hover:h-2/5 group-hover:w-2/5"
-                src={map.emblemURL}
+                src={map.emblemUrl}
                 alt={map.name}
                 width={1280}
                 height={1280}
