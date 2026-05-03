@@ -141,7 +141,7 @@ export const fetchLineups = async (
           },
           {
             id: 6,
-            name: "B flash from upper tunnel",
+            name: "B Site Entry Flash",
             mapSlug: "dust2",
             type: "flash",
             description: "",
@@ -149,12 +149,13 @@ export const fetchLineups = async (
             precision: 1,
             duration: 1.4,
             team: "T",
-            youtubeUrl: "https://www.youtube.com/embed/DDG5FzTh47Y",
+            youtubeUrl: "https://www.youtube.com/embed/8hSfO7M_FWE",
             radarIndex: 0,
             points: [
               { x: 125, y: 455 },
               { x: 75, y: 182 },
               { x: 70, y: 205 },
+              { x: 67, y: 190 },
             ],
           },
           {
