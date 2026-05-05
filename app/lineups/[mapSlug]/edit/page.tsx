@@ -24,7 +24,8 @@ const EditLineupPage = () => {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(JSON.stringify(points, null, 2));
+    const jsonData = JSON.stringify(points, null, 2);
+    navigator.clipboard.writeText(`"points": ${jsonData}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -150,7 +151,7 @@ const EditLineupPage = () => {
                 <button
                   onClick={copyToClipboard}
                   disabled={points.length === 0}
-                  className="flex items-center gap-2 text-xs font-bold text-zinc-400 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex items-center gap-2 text-xs font-bold text-zinc-400 transition-colors hover:cursor-pointer hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {copied ? (
                     <span className="text-green-500">Copied!</span>
