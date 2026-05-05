@@ -1,9 +1,14 @@
 const getNavItems = () => {
   return [
     {
-      href: "/lineups/dust2",
+      href: "/lineups/all",
       label: "Lineups",
       enabled: true,
+    },
+    {
+      href: "/playbook",
+      label: "Playbook",
+      enabled: false,
     },
     {
       href: "/cheater-checker",
