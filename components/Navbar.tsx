@@ -47,21 +47,25 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.enabled ? link.href : "#"}
-                className={twMerge(
-                  "inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium uppercase transition-colors",
-                  link.enabled
-                    ? "hover:border-primary hover:text-primary text-foreground"
-                    : "opacity-50 hover:cursor-default",
-                )}
-                title={link.enabled ? "" : "Coming soon!"}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.enabled ? (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-foreground hover:border-primary hover:text-primary inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium uppercase transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <span
+                  key={link.label}
+                  className="inline-flex cursor-default items-center px-1 pt-1 text-sm font-medium uppercase opacity-50"
+                  title="Coming soon!"
+                >
+                  {link.label}
+                </span>
+              ),
+            )}
           </div>
 
           {/* Mobile Menu Button */}
