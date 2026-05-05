@@ -57,6 +57,7 @@ const Navbar = () => {
                     ? "hover:border-primary hover:text-primary text-foreground"
                     : "opacity-50 hover:cursor-default",
                 )}
+                title={link.enabled ? "" : "Coming soon!"}
               >
                 {link.label}
               </Link>
