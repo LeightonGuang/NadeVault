@@ -1,7 +1,7 @@
 const getNavItems = () => {
   return [
     {
-      href: "/lineups/all",
+      href: "/lineups/dust2",
       label: "Lineups",
       enabled: true,
     },
