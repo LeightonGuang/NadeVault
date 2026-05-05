@@ -317,4 +317,31 @@ export const dust2Lineups: Lineup[] = [
       },
     ],
   },
+  {
+    id: 16,
+    name: "A Long Smoke from Elevator",
+    mapSlug: "dust2",
+    type: "smoke",
+    description: "",
+    throwType: "left click throw",
+    precision: 1,
+    duration: 3,
+    team: "CT",
+    youtubeUrl: "https://www.youtube.com/embed/ZaHyTlxVpUQ",
+    radarIndex: 0,
+    points: [
+      {
+        x: 789.2585238119799,
+        y: 212.84689896793765,
+      },
+      {
+        x: 927.3384490447391,
+        y: 371.1155511804907,
+      },
+      {
+        x: 883.991732070303,
+        y: 416.0576348483561,
+      },
+    ],
+  },
 ];
