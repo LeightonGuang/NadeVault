@@ -11,7 +11,7 @@ export const dust2Lineups: Lineup[] = [
     precision: 1,
     duration: 3,
     team: "T",
-    youtubeUrl: "https://www.youtube.com/embed/WwVY1MztYnc",
+    youtubeUrl: "https://www.youtube.com/embed/nXziBigQPH4",
     radarIndex: 0,
     points: [
       { x: 513, y: 615 },
