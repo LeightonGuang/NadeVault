@@ -8,6 +8,7 @@ import {
   CrosshairIcon,
 } from "@/assets/icons";
 import { useState } from "react";
+import getMaps from "@/utils/getMaps";
 import Radar from "../components/Radar";
 import { useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,12 +19,13 @@ import { MapSlug } from "@/types/Map";
 
 const EditLineupPage = () => {
   const params = useParams();
-  const mapSlug = (params.mapSlug as MapSlug) || "mirage";
+  const mapSlug = (params.mapSlug as MapSlug) || "dust2";
   const [points, setPoints] = useState<Point[]>([]);
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(JSON.stringify(points, null, 2));
+    const jsonData = JSON.stringify(points, null, 2);
+    navigator.clipboard.writeText(`"points": ${jsonData}`);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -60,6 +62,7 @@ const EditLineupPage = () => {
                 points={points}
                 onPointsChange={setPoints}
                 className="relative z-10 h-full w-full shadow-2xl"
+                radars={getMaps(mapSlug)[0]?.radars || []}
               />
             </div>
           </motion.div>
@@ -148,7 +151,7 @@ const EditLineupPage = () => {
                 <button
                   onClick={copyToClipboard}
                   disabled={points.length === 0}
-                  className="flex items-center gap-2 text-xs font-bold text-zinc-400 transition-colors hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex items-center gap-2 text-xs font-bold text-zinc-400 transition-colors hover:cursor-pointer hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {copied ? (
                     <span className="text-green-500">Copied!</span>

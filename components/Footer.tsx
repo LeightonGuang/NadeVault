@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 import getNavItems from "@/utils/getNavItems";
 import getSocialLinks from "@/utils/getSocialLinks";
 
@@ -29,17 +30,26 @@ const Footer = () => {
             <h3 className="mb-3 text-sm font-bold tracking-wider text-zinc-400 uppercase">
               Navigation
             </h3>
-            <ul className="space-y-2 text-sm">
-              {navLinks.map((link) => (
-                <li key={link.href}>
+            <ul className="flex flex-col space-y-2 text-sm">
+              {navLinks.map((link) =>
+                link.enabled ? (
                   <Link
+                    key={link.label}
                     href={link.href}
                     className="text-zinc-500 hover:text-white"
                   >
                     {link.label}
                   </Link>
-                </li>
-              ))}
+                ) : (
+                  <span
+                    key={link.label}
+                    className="cursor-default text-zinc-500 opacity-50"
+                    title="Coming soon!"
+                  >
+                    {link.label}
+                  </span>
+                ),
+              )}
             </ul>
           </div>
 

@@ -1,3 +1,4 @@
+import getMaps from "@/utils/getMaps";
 import { fetchLineups } from "@/lib/api/lineups";
 import MapSelector from "../../components/MapSelector";
 import RadarAndInfo from "@/app/lineups/[mapSlug]/components/RadarAndInfo";
@@ -16,6 +17,10 @@ const LineupPage = async ({
 }) => {
   const { mapSlug, nadeType, lineupSlug } = await params;
   const lineups = await fetchLineups(mapSlug, nadeType);
+  const map = getMaps(mapSlug)[0];
+
+  if (!map) return <div>Map not found</div>;
+
   const lineup = lineups.find((l) => l.id === parseInt(lineupSlug));
 
   return (
@@ -31,6 +36,7 @@ const LineupPage = async ({
           lineups={lineups}
           selectedLineup={lineup}
           nadeType={nadeType}
+          radars={map.radars}
         />
       </div>
     </section>

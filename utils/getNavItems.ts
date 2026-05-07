@@ -6,6 +6,11 @@ const getNavItems = () => {
       enabled: true,
     },
     {
+      href: "/playbook",
+      label: "Playbook",
+      enabled: false,
+    },
+    {
       href: "/cheater-checker",
       label: "Cheater Checker",
       enabled: false,

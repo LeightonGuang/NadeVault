@@ -27,4 +27,5 @@ export interface Lineup {
   duration: number;
   youtubeUrl: string;
   points: Point[];
+  radarIndex: 0 | 1;
 }

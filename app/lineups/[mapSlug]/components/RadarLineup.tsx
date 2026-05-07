@@ -58,7 +58,7 @@ const RadarLineup = ({
         strokeWidth={isSelected ? "4" : "2"}
         strokeDasharray="4 4"
         className={twMerge(
-          "pointer-events-none stroke-4 opacity-40 transition-all [stroke-dasharray:4_4] group-hover:opacity-100",
+          "pointer-events-none stroke-4 opacity-40 transition-all [stroke-dasharray:8_4] group-hover:opacity-100",
           isSelected && "opacity-100",
           lineup.type === "smoke" && "stroke-nade-smoke",
           lineup.type === "molly" && "stroke-nade-molly",
@@ -135,11 +135,13 @@ const RadarLineup = ({
                 : "5"
           }
           className={twMerge(
-            "opacity-0 cursor-pointer transition-all group-hover:opacity-100",
+            "cursor-pointer opacity-0 transition-all group-hover:opacity-100",
             isSelected && "opacity-100",
             lineup.type === "smoke" && "fill-nade-smoke group-hover:opacity-50",
             lineup.type === "molly" && "fill-nade-molly group-hover:opacity-50",
-            isSelected && (lineup.type === "smoke" || lineup.type === "molly") && "opacity-50",
+            isSelected &&
+              (lineup.type === "smoke" || lineup.type === "molly") &&
+              "opacity-50",
             lineup.type === "he" && "fill-nade-he",
             lineup.type === "flash" && "fill-nade-flash",
           )}

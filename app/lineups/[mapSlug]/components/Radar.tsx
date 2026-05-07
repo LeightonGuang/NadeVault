@@ -6,8 +6,8 @@ import { twMerge } from "tailwind-merge";
 import RadarTooltip from "./RadarTooltip";
 import RadarToolbar from "./RadarToolbar";
 import RadarEditPoints from "./RadarEditPoints";
-import { useState, useRef, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { useState, useRef, useEffect } from "react";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 import { Point } from "@/types/Point";
@@ -24,6 +24,7 @@ const Radar = ({
   className,
   onPointsChange,
   points: controlledPoints,
+  radars,
 }: {
   mapSlug: MapSlug;
   isReadOnly?: boolean;
@@ -33,11 +34,13 @@ const Radar = ({
   className?: string;
   onPointsChange?: (points: Point[]) => void;
   points?: Point[];
+  radars: string[];
 }) => {
   const [scale, setScale] = useState(1);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [internalPoints, setInternalPoints] = useState<Point[]>([]);
   const [hoveredLineup, setHoveredLineup] = useState<Lineup | null>(null);
+  const [radarIndex, setRadarIndex] = useState(0);
   const mapWidth = 1024;
   const mapHeight = 1024;
 
@@ -77,8 +80,21 @@ const Radar = ({
   };
 
   useEffect(() => {
-    console.log({ points });
-  }, [points]);
+    if (lineupSlug) {
+      const selected = lineups.find(
+        (l) =>
+          l.id.toString() === lineupSlug ||
+          l.name.toLowerCase().replace(/\s+/g, "-") === lineupSlug,
+      );
+      if (selected && selected.radarIndex !== undefined) {
+        setRadarIndex(selected.radarIndex);
+      }
+    }
+  }, [lineupSlug, lineups]);
+
+  const filteredLineups = lineups?.filter(
+    (l) => (l.radarIndex ?? 0) === radarIndex,
+  );
 
   return (
     <div
@@ -106,8 +122,8 @@ const Radar = ({
                       <Image
                         className="pointer-events-none aspect-square h-full w-full object-contain select-none"
                         draggable={false}
-                        src={`/radar/${mapSlug}.png`}
-                        alt={mapSlug}
+                        src={radars[radarIndex] || `/radar/${mapSlug}.png`}
+                        alt={`${mapSlug} radar ${radarIndex}`}
                         width={mapWidth}
                         height={mapHeight}
                         priority
@@ -124,7 +140,7 @@ const Radar = ({
                       onClick={handleSvgClick}
                     >
                       <g>
-                        {lineups?.map((lineup) => (
+                        {filteredLineups?.map((lineup) => (
                           <RadarLineup
                             key={`lineup-${lineup.id}`}
                             lineup={lineup}
@@ -181,6 +197,34 @@ const Radar = ({
                   <path d="M3 3v5h5" />
                 </svg>
               </button>
+            )}
+
+            {/* Radar Level Selector */}
+            {radars.length > 1 && (
+              <div className="absolute top-6 right-6 z-20 flex flex-col gap-2">
+                {radars.map((path, index) => {
+                  const isUpper = path.toLowerCase().includes("upper");
+                  const isLower = path.toLowerCase().includes("lower");
+                  const label = isUpper ? "U" : isLower ? "L" : index + 1;
+                  const title = isUpper ? "Upper" : isLower ? "Lower" : `Level ${index + 1}`;
+
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => setRadarIndex(index)}
+                      className={twMerge(
+                        "flex h-10 w-10 items-center justify-center rounded-xl border text-sm font-bold transition-all hover:cursor-pointer active:scale-95 shadow-lg",
+                        radarIndex === index
+                          ? "border-amber-500/50 bg-amber-500/20 text-amber-500 shadow-amber-500/10"
+                          : "border-white/10 bg-zinc-900/60 text-white backdrop-blur-md hover:bg-white/10 shadow-black/20",
+                      )}
+                      title={title}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
             )}
           </div>
         )}

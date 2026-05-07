@@ -1,3 +1,4 @@
+import getMaps from "@/utils/getMaps";
 import { fetchLineups } from "@/lib/api/lineups";
 import MapSelector from "./components/MapSelector";
 import RadarAndInfo from "./components/RadarAndInfo";
@@ -11,6 +12,9 @@ const MapPage = async ({
 }) => {
   const { mapSlug } = await params;
   const lineups = await fetchLineups(mapSlug);
+  const map = getMaps(mapSlug)[0];
+
+  if (!map) return <div>Map not found</div>;
 
   return (
     <section className="h-section flex flex-col overflow-hidden">
@@ -25,6 +29,7 @@ const MapPage = async ({
           lineups={lineups}
           selectedLineup={lineups[0]}
           nadeType="all"
+          radars={map.radars}
         />
       </div>
     </section>

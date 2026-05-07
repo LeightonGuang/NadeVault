@@ -12,7 +12,9 @@ const MapSelector = ({
   className?: string;
   mapSlug: MapSlug;
 }) => {
-  const maps = getMaps();
+  const maps = getMaps()
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .sort((a, b) => (b.active ? 1 : -1) - (a.active ? 1 : -1));
 
   return (
     <div className={twMerge("flex h-8 w-full overflow-x-auto", className)}>

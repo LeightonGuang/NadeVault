@@ -28,6 +28,7 @@ const RadarAndInfo = ({
   lineupSlug,
   nadeType,
   className,
+  radars,
 }: {
   mapSlug: MapSlug;
   lineups: Lineup[];
@@ -35,6 +36,7 @@ const RadarAndInfo = ({
   lineupSlug?: string;
   nadeType: NadeType | "all";
   className?: string;
+  radars: string[];
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const dragControls = useDragControls();
@@ -87,6 +89,7 @@ const RadarAndInfo = ({
         lineups={lineups}
         lineupSlug={lineupSlug || selectedLineup?.id?.toString()}
         nadeType={nadeType}
+        radars={radars}
       />
 
       {/* ── Mobile Backdrop ── */}
