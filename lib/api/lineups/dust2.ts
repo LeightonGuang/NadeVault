@@ -344,4 +344,31 @@ export const dust2Lineups: Lineup[] = [
       },
     ],
   },
+  {
+    id: 17,
+    name: "Long Corner Self Pop Flash",
+    mapSlug: "dust2",
+    type: "flash",
+    description: "",
+    throwType: "left click throw",
+    precision: 1,
+    duration: 1.4,
+    team: "CT",
+    youtubeUrl: "https://www.youtube.com/embed/PI3zj26tg8g",
+    radarIndex: 0,
+    points: [
+      {
+        x: 843.6303174336377,
+        y: 446.2712638856787,
+      },
+      {
+        x: 855.8707929117145,
+        y: 384.7231624976185,
+      },
+      {
+        x: 871.4632184566802,
+        y: 444.06100415484934,
+      },
+    ],
+  },
 ];
