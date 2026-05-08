@@ -371,4 +371,21 @@ export const dust2Lineups: Lineup[] = [
       },
     ],
   },
+  {
+    id: 18,
+    name: "Short Pop Flash from Barrels",
+    mapSlug: "dust2",
+    type: "flash",
+    description: "",
+    throwType: "left click throw",
+    precision: 1,
+    duration: 1.4,
+    team: "T",
+    youtubeUrl: "https://www.youtube.com/embed/iFrPkV1EGpk",
+    radarIndex: 0,
+    points: [
+      { x: 513, y: 615 },
+      { x: 571.4, y: 426.4 },
+    ],
+  },
 ];
