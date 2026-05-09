@@ -270,7 +270,7 @@ export const dust2Lineups: Lineup[] = [
     type: "he",
     description: "",
     throwType: "left click throw",
-    precision: 2,
+    precision: 3,
     duration: 1.4,
     team: "CT",
     youtubeUrl: "https://www.youtube.com/embed/zAJc2r8iPTg",
@@ -324,7 +324,7 @@ export const dust2Lineups: Lineup[] = [
     type: "smoke",
     description: "",
     throwType: "left click throw",
-    precision: 1,
+    precision: 2,
     duration: 3,
     team: "CT",
     youtubeUrl: "https://www.youtube.com/embed/ZaHyTlxVpUQ",
@@ -386,6 +386,33 @@ export const dust2Lineups: Lineup[] = [
     points: [
       { x: 513, y: 615 },
       { x: 571.4, y: 426.4 },
+    ],
+  },
+  {
+    id: 19,
+    name: "Mid Doors Smoke from Lower Tunnels",
+    mapSlug: "dust2",
+    type: "smoke",
+    description: "",
+    throwType: "middle click throw",
+    precision: 2,
+    duration: 1.4,
+    team: "T",
+    youtubeUrl: "https://www.youtube.com/embed/rtTjQfIKKcA",
+    radarIndex: 0,
+    points: [
+      {
+        x: 434.69036831739066,
+        y: 435.3894398430611,
+      },
+      {
+        x: 455.6194471354161,
+        y: 370.50929550718223,
+      },
+      {
+        x: 462.49614446133876,
+        y: 374.0971375902723,
+      },
     ],
   },
 ];
