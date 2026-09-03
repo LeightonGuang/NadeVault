@@ -32,8 +32,8 @@ const tips = [
   },
 
   {
-    id: "jump-throw",
-    title: "Jumpthrow",
+    id: "throw-types",
+    title: "Throw Types",
     content: (
       <div className="flex flex-col gap-2">
         <div>
