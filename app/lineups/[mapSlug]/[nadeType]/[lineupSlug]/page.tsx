@@ -1,5 +1,5 @@
 import getMaps from "@/utils/getMaps";
-import { fetchLineups } from "@/lib/api/lineups";
+import { fetchLineups } from "@/lib/api/fetchLineups";
 import MapSelector from "../../components/MapSelector";
 import RadarAndInfo from "@/app/lineups/[mapSlug]/components/RadarAndInfo";
 

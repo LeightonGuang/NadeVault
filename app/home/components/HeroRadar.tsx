@@ -1,8 +1,8 @@
 "use client";
 
 import getMaps from "@/utils/getMaps";
-import { fetchLineups } from "@/lib/api/lineups";
 import { useState, useEffect, useMemo } from "react";
+import { fetchLineups } from "@/lib/api/fetchLineups";
 import Radar from "@/app/lineups/[mapSlug]/components/Radar";
 
 import { Lineup } from "@/types/Lineup";

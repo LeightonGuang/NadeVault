@@ -2,6 +2,7 @@ import { MapSlug } from "@/types/Map";
 import { Lineup } from "@/types/Lineup";
 import { NadeType } from "@/types/Nade";
 import { dust2Lineups } from "./lineups/dust2";
+import { mirageLineups } from "./lineups/mirage";
 
 export const fetchLineups = async (
   mapSlug?: MapSlug,
@@ -13,7 +14,9 @@ export const fetchLineups = async (
         resolve([]);
       }, 500);
     });
-  } else if (mapSlug === "dust2") {
+  }
+
+  if (mapSlug === "dust2") {
     return new Promise<Lineup[]>((resolve) => {
       setTimeout(() => {
         if (!nadeType || nadeType === "all") {
@@ -23,7 +26,19 @@ export const fetchLineups = async (
         }
       }, 500);
     });
-  } else {
-    return [];
   }
+
+  if (mapSlug === "mirage") {
+    return new Promise<Lineup[]>((resolve) => {
+      setTimeout(() => {
+        if (!nadeType || nadeType === "all") {
+          resolve(mirageLineups);
+        } else {
+          resolve(mirageLineups.filter((l) => l.type === nadeType));
+        }
+      }, 500);
+    });
+  }
+
+  return [];
 };
