@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Lineup } from "@/types/Lineup";
 import { twMerge } from "tailwind-merge";
 import PrecisionMeter from "./PrecisionMeter";
@@ -31,19 +32,35 @@ const InfoCard = ({
               <span className="text-white/20">|</span>
               <span className="text-primary">{lineup.type}</span>
               <span className="text-white/20">|</span>
-              <span className="text-white/50">{lineup.throwType}</span>
+              <span className="text-white/50">
+                Precision{" "}
+                <Link
+                  href="/tips#throw-types"
+                  className="font-semibold lowercase hover:text-white/60"
+                >
+                  ⓘ
+                </Link>
+              </span>
             </div>
           </header>
 
           <div className="overflow-hidden rounded-xl border border-white/10 bg-black/40 shadow-2xl">
-            <iframe
-              className="aspect-9/16 w-full"
-              src={lineup.youtubeUrl}
-              title={lineup.name}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
+            {lineup.youtubeUrl ? (
+              <iframe
+                className="aspect-9/16 w-full"
+                src={lineup.youtubeUrl}
+                title={lineup.name}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            ) : (
+              <div className="flex aspect-square h-full w-full items-center justify-center">
+                <span className="font-[Hoover] text-lg font-medium text-white/30">
+                  No video available
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="space-y-4">
@@ -56,7 +73,13 @@ const InfoCard = ({
             <div className="grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
               <div className="space-y-2">
                 <h3 className="text-[10px] font-bold tracking-[0.2em] text-white/40 uppercase">
-                  Precision
+                  Precision{" "}
+                  <Link
+                    href="/tips#precision-scale"
+                    className="font-semibold lowercase hover:text-white/50"
+                  >
+                    ⓘ
+                  </Link>
                 </h3>
                 <PrecisionMeter scale={lineup.precision} />
               </div>

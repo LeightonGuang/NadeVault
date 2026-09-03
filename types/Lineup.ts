@@ -26,7 +26,7 @@ export interface Lineup {
     | "crouch jump throw"
     | "middle click throw";
   duration: number;
-  youtubeUrl: string;
+  youtubeUrl?: string;
   points: Point[];
   radarIndex: 0 | 1;
 }
