@@ -18,12 +18,12 @@ const getSocialLinks = () => [
   },
   {
     name: "Instagram",
-    url: "https://instagram.com/NadeVault",
+    url: "https://instagram.com/nade.vault",
     icon: <InstagramLogoSvg />,
   },
   {
     name: "X",
-    url: "https://x.com/NadeVault",
+    url: "https://x.com/NadeVaultgg",
     icon: <XLogoSvg />,
   },
 ];
