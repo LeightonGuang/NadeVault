@@ -415,4 +415,31 @@ export const dust2Lineups: Lineup[] = [
       },
     ],
   },
+  {
+    id: 20,
+    name: "CT Smoke from Close Mid Doors",
+    mapSlug: "dust2",
+    type: "smoke",
+    description: "",
+    throwType: "left click throw",
+    precision: 2,
+    duration: 4,
+    team: "T",
+    youtubeUrl: "https://www.youtube.com/embed/2tRXc_1fdtA",
+    radarIndex: 0,
+    points: [
+      {
+        x: 500.7640672231038,
+        y: 341.9378896575916,
+      },
+      {
+        x: 428.281255477965,
+        y: 301.89213348878184,
+      },
+      {
+        x: 522.5359954837871,
+        y: 233.20193193088477,
+      },
+    ],
+  },
 ];
